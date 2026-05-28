@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: site.title }}</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: #faf8f3;
+        color: #333;
+        line-height: 1.6;
+      }
+      .site-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      a {
+        color: #2a5a7a;
+        text-decoration: none;
+      }
+      header {
+        margin-bottom: 2rem;
+      }
+      nav a {
+        margin-right: 1rem;
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <header>
+        <h1>{{ site.title }}</h1>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/cv.html">CV</a>
+          <a href="/publications.html">Publications</a>
+          <a href="/garden/">Garden</a>
+        </nav>
+      </header>
+
+      {{ content }}
+
+      <footer>
+        <p>Generated with Jekyll.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+title: Gautam Bastian
+url: ""
+baseurl: ""
+
+collections:
+  garden:
+    output: true
+    permalink: /garden/:path/
+
+exclude:
+  - .obsidian
+  - .jekyll-cache
+  - _site

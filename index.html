@@ -33,12 +33,69 @@
         line-height: 1.8;
         color: #6b7d70;
       }
+      .social-links {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(95, 125, 99, 0.08);
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      .social-links a:hover {
+        background-color: rgba(95, 125, 99, 0.15);
+        transform: translateY(-2px);
+      }
+      .social-links svg {
+        width: 24px;
+        height: 24px;
+        stroke: #5f7d63;
+        fill: none;
+        stroke-width: 1.5;
+      }
+      .social-links a:hover svg {
+        stroke: #4a5d4f;
+      }
+    </style>
+    <script>
+      // Spam-safe email obfuscation
+      document.addEventListener('DOMContentLoaded', function() {
+        const emailLink = document.getElementById('email-link');
+        if (emailLink) {
+          const user = 'gautamb';
+          const domain = 'gmail.com';
+          emailLink.href = 'mailto:' + user + '@' + domain;
+        }
+      });
+    </script>
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Gautam Bastian</h1>
-      <p>Welcome to my personal landing page.</p>
+      <p>Evidence in service of human flourishing.</p>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/gautambastian" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a id="email-link" title="Email">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="M2 6l10 7.5L22 6"></path>
+          </svg>
+        </a>
+      </div>
     </div>
   </body>
 </html>
