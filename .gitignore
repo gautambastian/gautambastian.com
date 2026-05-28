@@ -1,3 +1,13 @@
+_garden/
 _drafts/
 _obsidian/
 .DS_Store
+.obsidian/
+.vscode/
+.idea/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+_site/
