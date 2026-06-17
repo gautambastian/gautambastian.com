@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gautam Bastian</title>
+    <style>
+        /* 1. Base Reset & Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Premium, soft stationery background gradient */
+            background: radial-gradient(circle, #fcfbf7 0%, #f6f5f0 100%);
+            font-family: 'Georgia', 'Baskerville', 'Palatino', 'Times New Roman', serif;
+            color: #3a5343; /* Deep, muted green */
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            max-width: 420px; /* Constrains text width beautifully */
+        }
+
+        /* 2. Portrait Container */
+        .profile-container {
+            margin-bottom: 1.75rem;
+        }
+
+        .profile-photo {
+            width: 180px; /* Slightly scaled down for perfect balance */
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%) sepia(20%); /* Blends nicely with the cream background */
+            /* FIXED: Corrected invalid hex values inside rgba() function */
+            border: 1px solid rgba(58, 83, 67, 0.15); 
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* 3. Typography Refinements */
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 600; 
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            font-size: 1.05rem;
+            font-style: italic;
+            line-height: 1.5;
+            opacity: 0.85;
+            letter-spacing: 0.02em; 
+            margin-bottom: 1.75rem; 
+        }
+
+        /* 4. Icon Links Interactivity */
+        .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #3a5343; 
+            text-decoration: none;
+            /* Premium, smooth custom transition easing */
+            transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .icon-link:hover {
+            opacity: 0.65;
+            transform: translateY(-2px);
+        }
+        
+        .icon-link:focus-visible {
+            outline: 2px dashed rgba(58, 83, 67, 0.5);
+            outline-offset: 4px;
+            border-radius: 2px;
+        }
+
+        .icon-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="profile-container">
+            <img src="profile-photo.png" alt="Gautam Bastian" class="profile-photo">
+        </div>
+        <h1>Gautam Bastian</h1>
+        <p>Evidence in service of human flourishing.</p>
+        
+        <nav class="links" aria-label="Social and contact links">
+            <a href="https://www.linkedin.com/in/gautambastian" class="icon-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+            
+            <a href="mailto:example@email.com" class="icon-link" aria-label="Email">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+                </svg>
+            </a>
+        </nav>
+    </main>
+
+</body>
+</html>

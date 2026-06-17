@@ -1,13 +1,23 @@
 title: Gautam Bastian
-url: ""
+description: Evidence in service of human flourishing.
+markdown: kramdown
+theme: minima # Optional, but we are writing custom CSS anyway
+
+author:
+  name: Gautam Bastian
+  linkedin: https://www.linkedin.com/in/gautambastian
+  scholar: https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en
+
 baseurl: ""
+url: "https://gautambastian.com"
 
-collections:
-  garden:
-    output: true
-    permalink: /garden/:path/
+# Build settings
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
 
+# Exclude from build
 exclude:
-  - .obsidian
-  - .jekyll-cache
-  - _site
+  - _obsidian/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
