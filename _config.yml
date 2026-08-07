@@ -18,6 +18,7 @@ permalink: /blog/:year/:month/:day/:title/
 # Exclude from build
 exclude:
   - _obsidian/
+  - _plan/
   - Gemfile
   - Gemfile.lock
   - README.md
