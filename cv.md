@@ -136,28 +136,41 @@ permalink: /cv/
 <div class="skills-grid">
 <div class="skill-row">
 <strong>Operations & Governance</strong>
-      Strategic planning, organizational transitions, governance design, executive advisory, stakeholder engagement, capital project oversight
+      Strategic planning, process improvement, change management, organizational transitions, governance design, budget oversight, cross-functional leadership, stakeholder engagement, capital project oversight
 </div>
 <div class="skill-row">
 <strong>Grant & Portfolio</strong>
-      Grant management, grantmaking, portfolio management, due diligence, impact assessment, cost-effectiveness, expected value analysis
+      Grant strategy, grant pipeline development, grant management, portfolio management, funder relations, reporting & compliance, due diligence, impact assessment, cost-effectiveness
 </div>
 <div class="skill-row">
 <strong>Research & Evaluation</strong>
-      RCTs, quasi-experimental design, meta-analysis, A/B testing, cost-benefit analysis, impact metrics
+      Performance monitoring, process evaluation, A/B testing, cost-benefit analysis, impact metrics, data-driven decision-making
 </div>
 <div class="skill-row">
 <strong>Technical Tools</strong>
-      Excel, Stata, Python, R, CRM, Asana, GIS, Microsoft 365, AI-assisted research
+      Excel, Python, CRM, Notion, GIS, Google Workspace, Microsoft 365, dashboards & reporting, AI-assisted research
 </div>
 <div class="skill-row">
 <strong>Domains</strong>
-      Operations excellence, global development, nonprofit management, government relations, network building
+      Operations excellence, process improvement, change management, organizational effectiveness, nonprofit management, government relations, network building
 </div>
 <div class="skill-row">
 <strong>Languages</strong>
       English, Hindi, Marathi (all native)
 </div>
+</div>
+</div>
+<div class="resume-section">
+<h2>Certifications</h2>
+<div class="cert-list">
+<ul class="entry-bullets" style="padding-left:1.1rem;">
+<li>Project Management — Harvard Extension</li>
+<li>Social Network Analysis — University of Michigan</li>
+<li>Measuring Social Norms — The World Bank</li>
+<li>Questionnaire Design — University of Michigan</li>
+<li>Randomized Evaluation Training — MIT</li>
+<li>Python — University of Michigan</li>
+</ul>
 </div>
 </div>
 <div class="resume-section">
