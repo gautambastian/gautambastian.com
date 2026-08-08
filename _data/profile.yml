@@ -17,6 +17,7 @@ links:
       url: /cv/
     - label: St. Jude Triduum
       url: /stjude
+      class: lower-menu
 #    - label: Thoughts
 #      url: /writing/
 #   - label: Garden

@@ -22,7 +22,7 @@ layout: default
 
   <div class="text-links" aria-label="Site links">
     {% for item in site.data.profile.links.menu %}
-      <a href="{{ item.url | relative_url }}" class="text-link">{{ item.label }}</a>
+      <a href="{{ item.url | relative_url }}" class="text-link {{ item.class | default: '' }}">{{ item.label }}</a>
     {% endfor %}
   </div>
 </nav>
