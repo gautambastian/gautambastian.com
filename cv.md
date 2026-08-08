@@ -126,7 +126,11 @@ permalink: /cv/
 <div class="pub-coauthors">With Sreelakshmi Papineni and Markus Goldstein.</div>
 </div>
 </div>
+<div class="pub-entry">
+<div class="pub-meta">
 <p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View my full list of publications on Google Scholar &rarr;</a></p>
+</div>
+</div>
 <div class="resume-section">
 <h2>Skills</h2>
 <div class="skills-grid">
