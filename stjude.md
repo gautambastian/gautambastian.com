@@ -100,10 +100,17 @@ permalink: /stjude/
   </div>
 </div>
 
-<div class="resume-section stjude-notes">
+<div class="resume-section stjude-prayer">
+  <h2>A Personal Note</h2>
+<p>
+  I have turned to St. Jude many times over the past six years and have found his intercession especially helpful during periods of financial difficulty. I offer this prayer with gratitude for the help I have received and in the hope that it may bring comfort and encouragement to others.
+</p>
+</div>
+
+<div class="resume-section stjude-prayer">
   <h2>About This Devotion</h2>
   <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas</a>, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</p>
-  <p>Prayer text: <a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Pray to St. Jude for Financial Help</a>.</p>
+  <p><a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Prayer text </a> is taken from Samuel Bastian's project to encourage a devotion to souls in purgatory.</p>
   <p>Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
 </div>
 
