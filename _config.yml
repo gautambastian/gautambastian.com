@@ -1,7 +1,6 @@
 title: Gautam Bastian
 description: Evidence in service of human flourishing.
 markdown: kramdown
-theme: minima # Optional, but we are writing custom CSS anyway
 
 author:
   name: Gautam Bastian
@@ -14,6 +13,10 @@ url: "https://gautambastian.com"
 # Build settings
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title/
+
+# Keep the custom CSS and image assets in the generated site.
+include:
+  - _assets
 
 # Exclude from build
 exclude:

@@ -2,64 +2,8 @@
 layout: resume
 title: St. Jude Prayer for Financial Help
 permalink: /stjude/
+stylesheet: stjude
 ---
-
-<style>
-  /* Page-specific details only; the resume layout controls typography, headings, and width. */
-  .stjude-image {
-    margin: 1.5rem 0 2rem;
-    text-align: center;
-  }
-
-  .stjude-image img {
-    display: block;
-    width: min(100%, 420px);
-    height: auto;
-    margin: 0 auto;
-    border-radius: 3px;
-  }
-
-  .stjude-prayer p {
-    font-style: normal !important;
-  }
-
-  .stjude-prayer .prayer-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    opacity: 0.9;
-  }
-
-  /* Give each paragraph room to breathe without changing the resume layout. */
-  .stjude-prayer .prayer-text p {
-    margin-bottom: 1.5rem;
-  }
-
-  .stjude-prayer .prayer-text p:last-child {
-    margin-bottom: 0;
-  }
-
-  .stjude-instructions,
-  .stjude-notes {
-    font-size: 1rem;
-    line-height: 1.7;
-    opacity: 0.9;
-  }
-
-  .stjude-notes p {
-    margin-bottom: 0.8rem;
-  }
-
-  @media (max-width: 700px) {
-    .stjude-image {
-      margin: 1.25rem 0 1.5rem;
-    }
-
-    .stjude-prayer .prayer-text {
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-  }
-</style>
 
 <div class="resume-header">
   <h1>St. Jude Prayer for Financial Help</h1>
@@ -68,7 +12,7 @@ permalink: /stjude/
 
 <div class="stjude-image">
   <img
-    src="{{ '/stjude.png' | relative_url }}"
+    src="{{ '/_assets/images/stjude.png' | relative_url }}"
     alt="St. Jude, Sacristy of the church of Piccola Casa di San Giuda Taddeo, Rome"
     loading="lazy"
   >
@@ -77,7 +21,7 @@ permalink: /stjude/
 <div class="resume-section stjude-prayer">
   <h2>Prayer to St. Jude for Financial Help</h2>
   
-  <div class="prayer-text">
+  <div class="stjude-text">
     <p>Sign of the Cross. Amen.</p>
 
     <p>St. Jude Thaddeus, Apostle of Jesus Christ, glorious Martyr and great intercessor in every difficult problem. Today, I turn to you with deep faith to ask for your generous assistance, as I am afflicted and tormented by severe financial problems.</p>
@@ -96,20 +40,24 @@ permalink: /stjude/
 
     <p><strong>So be it.</strong></p>
 
-     <p class="stjude-instructions">Conclude with the Apostles' Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
+    <p>Conclude with the Apostles' Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
   </div>
 </div>
 
 <div class="resume-section stjude-prayer">
   <h2>A Personal Note</h2>
-<p>
-  I have turned to St. Jude many times over the past six years and have found his intercession especially helpful during periods of financial difficulty. I offer this prayer with gratitude for the help I have received and in the hope that it may bring comfort and encouragement to others.
-</p>
+
+  <div class="stjude-text">
+    <p>I have turned to St. Jude many times over the past six years and have found his intercession especially helpful during periods of financial difficulty. I offer this prayer with gratitude for the help I have received and in the hope that it may bring comfort and encouragement to others.</p>
+  </div>
 </div>
 
 <div class="resume-section stjude-prayer">
   <h2>About This Devotion</h2>
-  <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas</a>, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</p>
-  <p><a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Prayer text </a> is taken from Samuel Bastian's project to encourage a devotion to souls in purgatory.</p>
 
-<p><a href="{{ '/' | relative_url }}">&larr; Home</a></p>
+  <div class="stjude-text">
+    <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas</a>, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</p>
+
+    <p><a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Prayer text</a> is taken from Samuel Bastian's project to encourage a devotion to souls in purgatory.</p>
+  </div>
+</div>

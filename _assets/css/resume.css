@@ -1,0 +1,213 @@
+/* Resume layout */
+body {
+  min-height: 100vh;
+  padding: 3rem 1.25rem;
+}
+
+.resume-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.resume-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(58, 83, 67, 0.18);
+}
+
+.resume-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.resume-header .tagline {
+  margin-bottom: 0.85rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
+.resume-header .contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+
+.resume-header .contact a {
+  border-bottom: 1px solid rgba(58, 83, 67, 0.25);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.resume-header .contact a:hover {
+  border-bottom-color: #3a5343;
+}
+
+.resume-section {
+  margin-bottom: 2.25rem;
+}
+
+.resume-section h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(58, 83, 67, 0.14);
+  color: #3a5343;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 1.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry-title {
+  grid-column: 1;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.entry-org {
+  grid-column: 1;
+  margin-top: 0.15rem;
+  font-size: 0.97rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.entry-date {
+  grid-column: 2;
+  grid-row: 1;
+  padding-top: 0.15rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.entry-bullets {
+  grid-column: 1 / -1;
+  margin-top: 0.6rem;
+  padding-left: 1.1rem;
+}
+
+.entry-bullets li {
+  margin-bottom: 0.4rem;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+.pub-entry {
+  margin-bottom: 1.4rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(58, 83, 67, 0.18);
+}
+
+.pub-entry:last-child {
+  margin-bottom: 0;
+}
+
+.pub-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pub-title a {
+  border-bottom: 1px solid rgba(58, 83, 67, 0.25);
+  color: #3a5343;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.pub-title a:hover {
+  border-bottom-color: #3a5343;
+}
+
+.pub-meta {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.4;
+  opacity: 0.72;
+}
+
+.pub-coauthors {
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  opacity: 0.65;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem 2rem;
+}
+
+.skill-row {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.skill-row strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+.resume-wrap .back-link {
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 560px) {
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-date {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 0.2rem;
+    text-align: left;
+  }
+
+  .resume-header h1 {
+    font-size: 1.9rem;
+  }
+}
+
+@media print {
+  body {
+    padding: 0;
+    background: #fff;
+  }
+
+  .back-link {
+    display: none;
+  }
+}

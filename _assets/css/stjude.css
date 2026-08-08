@@ -1,0 +1,28 @@
+/* St. Jude page styles */
+.stjude-image {
+  margin: 1.5rem 0 2rem;
+  text-align: center;
+}
+
+.stjude-image img {
+  display: block;
+  width: min(100%, 420px);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+
+.stjude-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.stjude-text p {
+  margin: 0 0 1.5rem;
+  font-style: normal;
+}
+
+.stjude-text p:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,77 @@
+/* Shared site styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle, #fcfbf7 0%, #f6f5f0 100%);
+  color: #3a5343;
+  font-family: 'Georgia', 'Baskerville', 'Palatino', 'Times New Roman', serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #3a5343;
+}
+
+main {
+  max-width: 420px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+/* Publications and other pages using the default layout. */
+.pub-list {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.pub-list h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pub-list h3 a {
+  border-bottom: 1px solid rgba(58, 83, 67, 0.2);
+  color: #3a5343;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.pub-list h3 a:hover {
+  border-bottom-color: #3a5343;
+}
+
+.pub-list em {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+hr {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px dashed rgba(58, 83, 67, 0.15);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  color: #3a5343;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
