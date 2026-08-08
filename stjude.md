@@ -212,7 +212,7 @@ page_class: stjude-layout
   <main class="prayer">
     <h2>Recite on three consecutive days.</h2>
 
-    <p>Sign of the Cross: In the Name of the Father, and of the Son, and of the Holy Spirit. <strong>Amen.</strong></p>
+    <p>Sign of the Cross. Amen.</p>
 
     <h3>Prayer to St. Jude for Financial Help</h3>
     <div class="prayer-text">
@@ -230,7 +230,7 @@ page_class: stjude-layout
       <p><emphasis>Apostles' Creed:</emphasis> I believe in God, the Father almighty, creator of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; he descended into hell; on the third day he rose again from the dead; he ascended into heaven, and is seated at the right hand of God the Father almighty; from there he will come to judge the living and the dead. I believe in the Holy Spirit, the Holy Catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. <strong>Amen.</strong></p>
     </div>
 
-    <p class="instructions">Conclude with the Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
+    <p class="instructions">Conclude with the Apostles Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
   </main>
 
   <aside class="stjude-notes">
