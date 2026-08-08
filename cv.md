@@ -173,16 +173,3 @@ permalink: /cv/
 </ul>
 </div>
 </div>
-<div class="resume-section">
-<h2>Certifications</h2>
-<div class="cert-list">
-<ul class="entry-bullets" style="padding-left:1.1rem;">
-<li>Project Management — Harvard Extension</li>
-<li>Social Network Analysis — University of Michigan</li>
-<li>Measuring Social Norms — The World Bank</li>
-<li>Questionnaire Design — University of Michigan</li>
-<li>Randomized Evaluation Training — MIT</li>
-<li>Python — University of Michigan</li>
-</ul>
-</div>
-</div>
