@@ -1,7 +1,7 @@
 ---
 layout: resume
 title: Gautam Bastian — Resume
-permalink: /cv/
+permalink: /resume/
 ---
 <div class="resume-header">
 <h1>Gautam Bastian</h1>

@@ -14,7 +14,7 @@ links:
 
   menu:
     - label: Resume
-      url: /cv/
+      url: /resume/
     - label: St. Jude Triduum
       url: /stjude
       class: lower-menu
