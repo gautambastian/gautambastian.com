@@ -207,7 +207,6 @@ page_class: stjude-layout
       alt="The Apostle Saint Jude Thaddeus by Anthony van Dyck, photographed by Sailko"
       loading="lazy"
     />
-    <p class="attribution"><em>The Apostle Saint Jude Thaddeus</em> by Anthony van Dyck, photographed by Sailko. Image via <a href="https://commons.wikimedia.org/wiki/File:Antoon_van_dyck,_l%27apostolo_giuda_taddeo,_1618-20_ca.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</p>
   </div>
 
   <main class="prayer">
@@ -215,7 +214,7 @@ page_class: stjude-layout
 
     <p>Sign of the Cross: In the Name of the Father, and of the Son, and of the Holy Spirit. <strong>Amen.</strong></p>
 
-    <h2>Prayer to St. Jude for Financial Help</h2>
+    <h3>Prayer to St. Jude for Financial Help</h3>
     <div class="prayer-text">
       <p>St. Jude Thaddeus, Apostle of Jesus Christ, glorious Martyr and great intercessor in every difficult problem. Today, I turn to you with deep faith to ask for your generous assistance, as I am afflicted and tormented by severe financial problems.</p>
       <p>You are my beloved saint, my blessed patron and noble protector; welcome my soul and my body, my mind and my heart.</p>
