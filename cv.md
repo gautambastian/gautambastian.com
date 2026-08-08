@@ -115,7 +115,6 @@ permalink: /cv/
 <div class="pub-title">
 <a href="https://doi.org/10.1371/journal.pone.0192756" target="_blank">Gender-Transformative Bandebereho Couples' Intervention to Promote Male Engagement in Reproductive and Maternal Health and Violence Prevention in Rwanda</a>
 </div>
-<p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View my full list of publications on Google Scholar &rarr;</a></p>
 <div class="pub-meta">PLOS ONE · 2018</div>
 <div class="pub-coauthors">With Ruti Levtov, Kate Doyle, Vandana Sharma, and Gary Barker.</div>
 </div>
@@ -127,6 +126,7 @@ permalink: /cv/
 <div class="pub-coauthors">With Sreelakshmi Papineni and Markus Goldstein.</div>
 </div>
 </div>
+<p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View my full list of publications on Google Scholar &rarr;</a></p>
 <div class="resume-section">
 <h2>Skills</h2>
 <div class="skills-grid">
