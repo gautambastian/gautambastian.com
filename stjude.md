@@ -40,9 +40,9 @@ permalink: /stjude/
 
   .stjude-instructions,
   .stjude-notes {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    opacity: 0.8;
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
   }
 
   .stjude-notes p {
@@ -76,9 +76,10 @@ permalink: /stjude/
 
 <div class="resume-section stjude-prayer">
   <h2>Prayer to St. Jude for Financial Help</h2>
-  <p>Sign of the Cross. <strong>Amen.</strong></p>
-
+  
   <div class="prayer-text">
+    <p>Sign of the Cross. Amen.</p>
+
     <p>St. Jude Thaddeus, Apostle of Jesus Christ, glorious Martyr and great intercessor in every difficult problem. Today, I turn to you with deep faith to ask for your generous assistance, as I am afflicted and tormented by severe financial problems.</p>
 
     <p>You are my beloved saint, my blessed patron and noble protector; welcome my soul and my body, my mind and my heart.</p>
