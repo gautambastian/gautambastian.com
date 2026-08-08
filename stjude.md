@@ -68,8 +68,8 @@ permalink: /stjude/
 
 <div class="stjude-image">
   <img
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Antoon_van_dyck%2C_l%27apostolo_giuda_taddeo%2C_1618-20_ca.jpg/960px-Antoon_van_dyck%2C_l%27apostolo_giuda_taddeo%2C_1618-20_ca.jpg"
-    alt="The Apostle Saint Jude Thaddeus by Anthony van Dyck, photographed by Sailko"
+    src="stjude.png"
+    alt="St. Jude, Sacristy of the church of Piccola Casa di San Giuda Taddeo, Rome"
     loading="lazy"
   >
 </div>
@@ -111,7 +111,5 @@ permalink: /stjude/
   <h2>About This Devotion</h2>
   <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas</a>, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</p>
   <p><a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Prayer text </a> is taken from Samuel Bastian's project to encourage a devotion to souls in purgatory.</p>
-  <p>Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
-</div>
 
 <p><a href="{{ '/' | relative_url }}">&larr; Home</a></p>
