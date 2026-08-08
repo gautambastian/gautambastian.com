@@ -6,7 +6,7 @@ permalink: /cv/
 
 <div class="resume-header">
   <h1>Gautam Bastian</h1>
-  <p class="tagline">Generalist · Economist · Grant Strategy · Impact Evaluation</p>
+  <p class="tagline">Operations Leader · Executive Advisor</p>
   <div class="contact">
     <span>Washington, DC</span>
     <a href="mailto:gautamb@gmail.com">gautamb@gmail.com</a>
@@ -18,16 +18,24 @@ permalink: /cv/
 <div class="resume-section">
   <h2>Summary</h2>
   <p style="font-size:1.0rem; line-height:1.7; opacity:0.9;">
-    An applied economist focused on helping development teams run smarter and more efficiently. I partner with funders, researchers, and field teams to bridge the gap between data and real-world execution. Building better operational processes and leveraging technology helps cut down project timelines, reduce administrative friction, and maximize limited resources for practical, scalable results.
+    A strategic operations leader and executive advisor with more than 20 years of experience managing complex programs, organizational transitions, and multi-million-dollar portfolios across education, international development, research, and policy organizations. I have led large-scale initiatives at the World Bank and Harvard Business School, with expertise in operational excellence, governance, project management, and stakeholder engagement. 
   </p>
 </div>
 
 <div class="resume-section">
   <h2>Experience</h2>
+<div class="entry">
+    <div class="entry-title">Operations Lead</div>
+    <div class="entry-date">Jul 2026 – present</div>
+    <div class="entry-org">Brooks Bawden Moore, LLC · Washington, DC</div>
+    <ul class="entry-bullets">
+      <li>Building systems that strengthen service delivery, improve decision-making, and support operational effectiveness.</li>
+    </ul>
+  </div>
 
   <div class="entry">
     <div class="entry-title">Director of Mission Advancement</div>
-    <div class="entry-date">Jul 2023 – Present</div>
+    <div class="entry-date">Jul 2023 – Jun 2026</div>
     <div class="entry-org">St. Jerome Academy · Hyattsville, MD</div>
     <ul class="entry-bullets">
       <li>Retained ~90% of 53 donors through sustained organizational change, securing $2.2M in individual contributions and supporting an additional $1M foundation grant — bringing total campaign commitments to $3.2M toward a $4M goal.</li>
