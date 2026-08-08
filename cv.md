@@ -135,7 +135,7 @@ permalink: /cv/
 </div>
 <div class="skill-row">
 <strong>Technical Tools</strong>
-      Excel, Stata, Python, R, CRM, Asana, GIS, Microsoft 365, AI-assisted research
+      Excel, Stata, Python, CRM, Notion, GIS, Google Workspace, Microsoft 365, AI-assisted research
 </div>
 <div class="skill-row">
 <strong>Domains</strong>
@@ -155,7 +155,7 @@ permalink: /cv/
 <li>Social Network Analysis — University of Michigan</li>
 <li>Measuring Social Norms — The World Bank</li>
 <li>Questionnaire Design — University of Michigan</li>
-<li>Randomized Evaluation Training — MIT</li>
+<li>Randomized Evaluation — MIT</li>
 <li>Python — University of Michigan</li>
 </ul>
 </div>
