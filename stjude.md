@@ -66,12 +66,8 @@ permalink: /stjude/
 </div>
 
 <div class="resume-section stjude-prayer">
-  <h2>Sign of the Cross</h2>
-  <p>Sign of the Cross. <strong>Amen.</strong></p>
-</div>
-
-<div class="resume-section stjude-prayer">
   <h2>Prayer to St. Jude for Financial Help</h2>
+  <p>Sign of the Cross. <strong>Amen.</strong></p>
 
   <div class="prayer-text">
     <p>St. Jude Thaddeus, Apostle of Jesus Christ, glorious Martyr and great intercessor in every difficult problem. Today, I turn to you with deep faith to ask for your generous assistance, as I am afflicted and tormented by severe financial problems.</p>
@@ -89,16 +85,9 @@ permalink: /stjude/
     <p>As an expression of my affection and gratitude, I promise you I will promote an authentic devotion to you, and already from this moment, I infinitely give you thanks for all your favors.</p>
 
     <p><strong>So be it.</strong></p>
-  </div>
-</div>
 
-<div class="resume-section stjude-prayer">
-  <h2>Apostles' Creed</h2>
-  <div class="prayer-text">
-    <p>I believe in God, the Father almighty, creator of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; he descended into hell; on the third day he rose again from the dead; he ascended into heaven, and is seated at the right hand of God the Father almighty; from there he will come to judge the living and the dead. I believe in the Holy Spirit, the Holy Catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. <strong>Amen.</strong></p>
+     <p class="stjude-instructions">Conclude with the Apostles' Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
   </div>
-
-  <p class="stjude-instructions">Conclude with the Apostles' Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
 </div>
 
 <div class="resume-section stjude-notes">
