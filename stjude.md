@@ -68,7 +68,7 @@ permalink: /stjude/
 
 <div class="stjude-image">
   <img
-    src="stjude.png"
+    src="{{ '/stjude.png' | relative_url }}"
     alt="St. Jude, Sacristy of the church of Piccola Casa di San Giuda Taddeo, Rome"
     loading="lazy"
   >
