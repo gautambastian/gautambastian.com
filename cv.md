@@ -97,26 +97,32 @@ permalink: /cv/
 </div>
 <div class="resume-section">
 <h2>Selected Publications</h2>
-<p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View full publications on Google Scholar &rarr;</a></p>
 <div class="pub-entry">
 <div class="pub-title">
-<a href="https://example.com" target="_blank">Business Training and Mentoring: Experimental Evidence from Women-Owned Microenterprises in Ethiopia</a>
+<a href="https://www.sciencedirect.com/org/science/article/abs/pii/S001300792300008X" target="_blank">Business Training and Mentoring: Experimental Evidence from Women-Owned Microenterprises in Ethiopia</a>
 </div>
 <div class="pub-meta">Economic Development and Cultural Change · 2022</div>
 <div class="pub-coauthors">With Mehrab Bakhtiar and Markus Goldstein.</div>
 </div>
 <div class="pub-entry">
 <div class="pub-title">
-<a href="https://example.com" target="_blank">Are Mobile Savings the Silver Bullet to Help Women Grow Their Businesses?</a>
+<a href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/512121538488834978" target="_blank">Are Mobile Savings the Silver Bullet to Help Women Grow Their Businesses?</a>
 </div>
-<div class="pub-meta">Center for Global Development · 2018</div>
+<div class="pub-meta">World Bank · 2018</div>
 </div>
 <div class="pub-entry">
 <div class="pub-title">
-<a href="https://example.com" target="_blank">Gender-Transformative Bandebereho Couples' Intervention to Promote Male Engagement in Reproductive and Maternal Health and Violence Prevention in Rwanda</a>
+<a href="https://doi.org/10.1371/journal.pone.0192756" target="_blank">Gender-Transformative Bandebereho Couples' Intervention to Promote Male Engagement in Reproductive and Maternal Health and Violence Prevention in Rwanda</a>
 </div>
+<p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View my full list of publications on Google Scholar &rarr;</a></p>
 <div class="pub-meta">PLOS ONE · 2018</div>
 <div class="pub-coauthors">With Ruti Levtov, Kate Doyle, Vandana Sharma, and Gary Barker.</div>
+<div class="pub-entry">
+<div class="pub-title">
+<a href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/201411503985884102" target="_blank">Are cash transfers better chunky or smooth? : evidence from an impact evaluation of a cash transfer program in northern Nigeria.</a>
+</div>
+<div class="pub-meta">World Bank · 2017</div>
+</div>
 </div>
 </div>
 <div class="resume-section">
