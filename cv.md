@@ -97,6 +97,7 @@ permalink: /cv/
 </div>
 <div class="resume-section">
 <h2>Selected Publications</h2>
+<p style="margin-bottom:1rem;"><a href="https://scholar.google.com/citations?user=vMkDMmwAAAAJ&hl=en" target="_blank">View full publications on Google Scholar &rarr;</a></p>
 <div class="pub-entry">
 <div class="pub-title">
 <a href="https://example.com" target="_blank">Business Training and Mentoring: Experimental Evidence from Women-Owned Microenterprises in Ethiopia</a>
@@ -135,7 +136,7 @@ permalink: /cv/
 </div>
 <div class="skill-row">
 <strong>Technical Tools</strong>
-      Excel, Stata, Python, CRM, Notion, GIS, Google Workspace, Microsoft 365, AI-assisted research
+      Excel, Stata, Python, R, CRM, Asana, GIS, Microsoft 365, AI-assisted research
 </div>
 <div class="skill-row">
 <strong>Domains</strong>
@@ -155,7 +156,7 @@ permalink: /cv/
 <li>Social Network Analysis — University of Michigan</li>
 <li>Measuring Social Norms — The World Bank</li>
 <li>Questionnaire Design — University of Michigan</li>
-<li>Randomized Evaluation — MIT</li>
+<li>Randomized Evaluation Training — MIT</li>
 <li>Python — University of Michigan</li>
 </ul>
 </div>
