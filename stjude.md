@@ -207,15 +207,14 @@ page_class: stjude-layout
       alt="The Apostle Saint Jude Thaddeus by Anthony van Dyck, photographed by Sailko"
       loading="lazy"
     />
-    <p class="attribution"><em>The Apostle Saint Jude Thaddeus</em> by Anthony van Dyck, photographed by Sailko. Image via <a href="https://commons.wikimedia.org/wiki/File:Antoon_van_dyck,_l%27apostolo_giuda_taddeo,_1618-20_ca.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</p>
   </div>
 
   <main class="prayer">
     <h2>Recite on three consecutive days.</h2>
 
-    <p>Sign of the Cross: In the Name of the Father, and of the Son, and of the Holy Spirit. <strong>Amen.</strong></p>
+    <p>Sign of the Cross. Amen.</p>
 
-    <h2>Prayer to St. Jude for Financial Help</h2>
+    <h3>Prayer to St. Jude for Financial Help</h3>
     <div class="prayer-text">
       <p>St. Jude Thaddeus, Apostle of Jesus Christ, glorious Martyr and great intercessor in every difficult problem. Today, I turn to you with deep faith to ask for your generous assistance, as I am afflicted and tormented by severe financial problems.</p>
       <p>You are my beloved saint, my blessed patron and noble protector; welcome my soul and my body, my mind and my heart.</p>
@@ -231,13 +230,13 @@ page_class: stjude-layout
       <p><emphasis>Apostles' Creed:</emphasis> I believe in God, the Father almighty, creator of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; he descended into hell; on the third day he rose again from the dead; he ascended into heaven, and is seated at the right hand of God the Father almighty; from there he will come to judge the living and the dead. I believe in the Holy Spirit, the Holy Catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. <strong>Amen.</strong></p>
     </div>
 
-    <p class="instructions">Conclude with the Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
+    <p class="instructions">Conclude with the Apostles Creed, Our Father, Hail Mary, and Glory Be, each three times, followed by the Sign of the Cross.</p>
   </main>
 
   <aside class="stjude-notes">
-    <h2>About this devotion</h2>
-    <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through Danny Thomas, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital. <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Read more about Danny Thomas.</a></p>
-    <p class="sources">Prayer text and background: <a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Pray to St. Jude for Financial Help</a>. Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
+    <p>About this devotion: St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</a></p>
+    <p>Prayer text: <a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Pray to St. Jude for Financial Help</a>. </p>
+    <p>Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
   </aside>
 
   <div class="back-link-wrap">
