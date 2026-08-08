@@ -234,9 +234,8 @@ page_class: stjude-layout
   </main>
 
   <aside class="stjude-notes">
-    <h2>About this devotion</h2>
-    <p>St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through Danny Thomas, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital. <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Read more about Danny Thomas.</a></p>
-    <p class="sources">Prayer text and background: <a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Pray to St. Jude for Financial Help</a>. Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
+    <p>About this devotion: St. Jude Thaddeus is traditionally invoked in desperate or seemingly hopeless situations, including financial difficulty. This prayer is said on three consecutive days. The association with financial help became widely known through <a href="https://www.stjude.org/directory/t/danny-thomas-founder.html" target="_blank" rel="noopener">Danny Thomas, whose devotion to St. Jude led him to found St. Jude Children's Research Hospital.</a></p>
+    <p class="stjude-notes">Prayer text: <a href="https://pray-for-souls.com/st-jude-for-financial-help/" target="_blank" rel="noopener">Pray to St. Jude for Financial Help</a>. Artwork: Anthony van Dyck (1599&ndash;1641); photograph by Sailko, CC BY 3.0.</p>
   </aside>
 
   <div class="back-link-wrap">
