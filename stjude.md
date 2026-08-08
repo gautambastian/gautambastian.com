@@ -29,6 +29,15 @@ permalink: /stjude/
     opacity: 0.9;
   }
 
+  /* Give each paragraph room to breathe without changing the resume layout. */
+  .stjude-prayer .prayer-text p {
+    margin-bottom: 1.5rem;
+  }
+
+  .stjude-prayer .prayer-text p:last-child {
+    margin-bottom: 0;
+  }
+
   .stjude-instructions,
   .stjude-notes {
     font-size: 0.9rem;
