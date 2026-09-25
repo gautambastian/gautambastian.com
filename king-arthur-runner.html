@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Quests of the Round Table</title>
+<style>
+  /* Pixel display font (falls back to monospace offline) */
+  @font-face {
+    font-family: 'Press Start 2P';
+    src: url('https://cdn.jsdelivr.net/fontsource/fonts/press-start-2p@latest/latin-400-normal.woff2') format('woff2');
+    font-display: swap;
+  }
+  :root {
+    --ink: #221a12;
+    --paper: #f3e3b8;
+    --paper-dark: #e2c98f;
+    --frame: #2c2418;
+    --accent: #b7342c;
+    --gold: #d9a927;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #141009; color: var(--ink); }
+  body {
+    display: flex; align-items: center; justify-content: center; padding: 16px;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  button { font: inherit; cursor: pointer; border: 0; }
+  .pixel { font-family: 'Press Start 2P', ui-monospace, Menlo, monospace; }
+
+  #app { width: min(1180px, 100%); }
+  .shell {
+    background: var(--paper);
+    border: 6px solid var(--frame);
+    box-shadow: 0 14px 0 #080604, 0 24px 48px rgba(0,0,0,.45);
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 16px; background: #2c2418; color: #f3e3b8; border-bottom: 4px solid #141009;
+  }
+  .brand { font-size: clamp(11px, 1.9vw, 18px); letter-spacing: 1px; text-shadow: 3px 3px 0 #000; }
+  .top-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .top-actions button {
+    color: #f3e3b8; background: #4a3b28; border: 3px solid #141009;
+    padding: 8px 11px; box-shadow: 3px 3px 0 #0a0805; font-size: 10px;
+  }
+  .top-actions button:hover { background: #63513a; }
+
+  .screen { padding: clamp(14px, 3vw, 30px); min-height: 660px; }
+  .hidden { display: none !important; }
+
+  /* ---------- Menu ---------- */
+  .hero { text-align: center; padding: 14px 10px 8px; }
+  .hero canvas { width: 104px; height: 126px; image-rendering: auto; }
+  h1 {
+    font-size: clamp(22px, 5vw, 46px); line-height: 1.25; margin: 14px 0 10px;
+    letter-spacing: 2px; text-transform: uppercase; color: #2c2418;
+    text-shadow: 4px 4px 0 var(--gold);
+  }
+  .subtitle { max-width: 640px; margin: 0 auto 20px; font-size: 15px; line-height: 1.65; color: #4c4130; font-style: italic; }
+  .main-menu { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; max-width: 640px; margin: 0 auto; }
+  .menu-btn {
+    min-height: 60px; padding: 12px; background: #365b5a; color: #fff4d1;
+    border: 4px solid #1e3336; box-shadow: 5px 5px 0 #1e3336;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .menu-btn:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 #1e3336; background: #43766f; }
+  .menu-btn.primary { background: #b33b32; border-color: #6e2525; box-shadow: 5px 5px 0 #6e2525; }
+  .menu-btn.primary:hover { background: #cf4b3c; }
+  .menu-btn.wide { grid-column: 1 / -1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; font-size: 12px; margin-top: 16px; color: #4c4130; }
+  .legend span { padding: 6px 9px; background: var(--paper-dark); border: 2px solid #a5854e; }
+
+  /* ---------- Panels ---------- */
+  .panel-title { margin: 0 0 14px; font-size: clamp(16px, 3vw, 24px); color: #2c2418; text-transform: uppercase; }
+  .panel-card { background: #f9ecca; border: 4px solid #a5854e; box-shadow: 6px 6px 0 #a5854e; padding: 18px; max-width: 940px; margin: 0 auto; }
+  .back-row { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 16px; max-width: 940px; margin-left: auto; margin-right: auto; }
+  .back-btn { background: #2c2418; color: #f3e3b8; border: 3px solid #141009; padding: 9px 13px; box-shadow: 3px 3px 0 #141009; font-size: 10px; }
+  .panel-note { font-size: 13px; line-height: 1.6; margin: 0 0 14px; color: #4c4130; }
+
+  .level-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .level-card {
+    position: relative; min-height: 128px; background: var(--paper-dark); border: 4px solid #8a6d3c;
+    box-shadow: 4px 4px 0 #8a6d3c; padding: 12px; text-align: left;
+  }
+  .level-card.unlocked:hover { background: #f3dfa9; transform: translate(2px,2px); }
+  .level-card.locked { filter: grayscale(.6); opacity: .6; }
+  .level-num { font-size: 22px; color: #2c2418; }
+  .level-name { font-size: 12px; margin-top: 10px; line-height: 1.4; color: #2c2418; }
+  .level-goal { font-size: 10px; margin-top: 10px; color: #5c4d33; }
+  .level-status { position: absolute; right: 10px; top: 10px; font-size: 20px; }
+
+  .shield-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+  .shield-card { background: var(--paper-dark); border: 4px solid #8a6d3c; box-shadow: 4px 4px 0 #8a6d3c; padding: 14px; text-align: center; position: relative; }
+  .shield-card canvas { width: 96px; height: 116px; }
+  .shield-card.locked canvas { filter: grayscale(1) opacity(.45); }
+  .shield-name { font-size: 11px; text-transform: uppercase; color: #2c2418; }
+  .shield-requirement { font-size: 11px; margin-top: 8px; color: #5c4d33; }
+  .lock-badge { position: absolute; top: 52px; left: 50%; transform: translateX(-50%); font-size: 30px; }
+
+  .suit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .suit-card { background: var(--paper-dark); border: 4px solid #8a6d3c; box-shadow: 4px 4px 0 #8a6d3c; padding: 14px; text-align: center; }
+  .suit-card:hover { background: #f3dfa9; }
+  .suit-card canvas { width: 96px; height: 116px; }
+  .suit-label { font-size: 11px; text-transform: uppercase; color: #2c2418; }
+  .suit-selected { font-size: 10px; margin-top: 8px; color: #1e5c46; font-weight: bold; }
+
+  .info-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .info-box { background: var(--paper-dark); border: 3px solid #8a6d3c; padding: 14px; min-height: 104px; }
+  .info-box h3 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; color: #2c2418; }
+  .info-box p { margin: 0; font-size: 13px; line-height: 1.65; color: #4c4130; }
+  kbd { background: #2c2418; color: #f3e3b8; padding: 2px 6px; font-size: 11px; border-radius: 3px; font-family: ui-monospace, monospace; }
+
+  /* ---------- Game ---------- */
+  .game-wrap { max-width: 1020px; margin: 0 auto; }
+  .game-hud { display: flex; align-items: stretch; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .hud-box {
+    display: flex; align-items: center; gap: 10px; background: #2c2418; color: #f3e3b8;
+    padding: 9px 13px; border: 3px solid #141009; box-shadow: 3px 3px 0 #141009; font-size: 12px;
+  }
+  .hud-box canvas { width: 26px; height: 32px; }
+  .game-stage { position: relative; }
+  #gameCanvas { display: block; width: 100%; height: auto; border: 5px solid #2c2418; background: #aee1ea; touch-action: none; }
+  .game-help { text-align: center; font-size: 12px; margin: 10px 0 0; color: #5c4d33; }
+  .game-controls { display: flex; justify-content: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .game-controls button {
+    background: #b33b32; color: #fff5d6; border: 3px solid #6e2525; box-shadow: 4px 4px 0 #6e2525;
+    padding: 12px 20px; font-size: 11px;
+  }
+  .game-controls button.secondary { background: #365b5a; border-color: #1e3336; box-shadow: 4px 4px 0 #1e3336; }
+
+  .overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(18, 14, 8, .72); padding: 20px; }
+  .modal { width: min(460px, 100%); background: var(--paper); border: 5px solid #2c2418; box-shadow: 8px 8px 0 #141009; padding: 24px; text-align: center; }
+  .modal h2 { margin: 0 0 12px; font-size: 20px; text-transform: uppercase; color: #2c2418; text-shadow: 3px 3px 0 var(--gold); }
+  .modal p { font-size: 14px; line-height: 1.7; margin: 8px 0 18px; color: #4c4130; }
+  .modal .menu-btn { width: 100%; margin-top: 8px; }
+
+  #toast {
+    position: absolute; top: 14px; left: 50%; transform: translate(-50%, -8px);
+    background: #2c2418; color: #f3e3b8; border: 3px solid var(--gold);
+    padding: 10px 16px; font-size: 11px; opacity: 0; pointer-events: none;
+    transition: opacity .25s, transform .25s; text-shadow: 2px 2px 0 #000;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 700px) {
+    body { padding: 0; align-items: stretch; }
+    #app { width: 100%; }
+    .shell { min-height: 100vh; border-width: 0; box-shadow: none; }
+    .screen { min-height: calc(100vh - 58px); padding: 14px; }
+    .main-menu { grid-template-columns: 1fr; }
+    .menu-btn.wide { grid-column: auto; }
+    .info-grid { grid-template-columns: 1fr; }
+    .topbar { padding: 10px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"><div class="shell">
+  <header class="topbar">
+    <div class="brand pixel">&#9876; Quests of the Round Table</div>
+    <div class="top-actions">
+      <button id="topMenuBtn" class="pixel hidden">Menu</button>
+      <button id="topPauseBtn" class="pixel hidden">Pause</button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN MENU ================= -->
+  <main id="menuScreen" class="screen">
+    <section class="hero">
+      <canvas id="crestCanvas" width="104" height="126"></canvas>
+      <h1 class="pixel">Quests of the<br>Round Table</h1>
+      <p class="subtitle">Guide Sir Lancelot through the medieval forest. Leap stump and knight alike, ride the ramps over the giants, and claim the Gold Lion Shield at fifty points.</p>
+    </section>
+    <nav class="main-menu">
+      <button id="startBtn" class="menu-btn primary wide pixel">Start Adventure</button>
+      <button id="levelsBtn" class="menu-btn pixel">Levels</button>
+      <button id="shieldsBtn" class="menu-btn pixel">Shields</button>
+      <button id="suitsBtn" class="menu-btn pixel">Suits</button>
+      <button id="instructionsBtn" class="menu-btn pixel">How to Play</button>
+    </nav>
+    <div class="legend"><span>Goal: 50 points</span><span>Lives: 3</span><span>No timer</span><span>No audio, by design</span></div>
+  </main>
+
+  <!-- ================= LEVELS ================= -->
+  <main id="levelsScreen" class="screen hidden">
+    <div class="back-row"><h2 class="panel-title pixel">Levels</h2><button class="back-btn pixel" data-back>Back</button></div>
+    <div class="panel-card">
+      <p class="panel-note">Each level is a stretch of the endless run. A level unlocks once your best score reaches its start. Select any unlocked level to begin the quest from there.</p>
+      <div id="levelGrid" class="level-grid"></div>
+    </div>
+  </main>
+
+  <!-- ================= SHIELDS ================= -->
+  <main id="shieldsScreen" class="screen hidden">
+    <div class="back-row"><h2 class="panel-title pixel">Shields</h2><button class="back-btn pixel" data-back>Back</button></div>
+    <div class="panel-card">
+      <p class="panel-note">Earn a new heraldic shield every ten points. The final reward is the Gold Lion Shield, borne by the champions of the Round Table.</p>
+      <div id="shieldGrid" class="shield-grid"></div>
+    </div>
+  </main>
+
+  <!-- ================= SUITS ================= -->
+  <main id="suitsScreen" class="screen hidden">
+    <div class="back-row"><h2 class="panel-title pixel">Suits</h2><button class="back-btn pixel" data-back>Back</button></div>
+    <div class="panel-card">
+      <p class="panel-note">All four tournament suits are granted at the start of the quest. Choose the armor Sir Lancelot wears into the forest.</p>
+      <div id="suitGrid" class="suit-grid"></div>
+    </div>
+  </main>
+
+  <!-- ================= INSTRUCTIONS ================= -->
+  <main id="instructionsScreen" class="screen hidden">
+    <div class="back-row"><h2 class="panel-title pixel">How to Play</h2><button class="back-btn pixel" data-back>Back</button></div>
+    <div class="panel-card">
+      <div class="info-grid">
+        <div class="info-box"><h3>Jump</h3><p>Press <kbd>Space</kbd>, <kbd>&uarr;</kbd> or <kbd>W</kbd>, click, or tap the screen to jump.</p></div>
+        <div class="info-box"><h3>Score</h3><p>One point for every obstacle cleared. Reach <b>50</b> to win the quest.</p></div>
+        <div class="info-box"><h3>Lives</h3><p>Three lives per run. A collision costs one life and briefly stuns Lancelot.</p></div>
+        <div class="info-box"><h3>Ramps</h3><p>Run into a wooden ramp to launch high over the giant knights that no jump can clear.</p></div>
+        <div class="info-box"><h3>Shields</h3><p>Every ten points upgrades your heraldic shield, from the plain red shield to the Gold Lion.</p></div>
+        <div class="info-box"><h3>Pause</h3><p>Press <kbd>P</kbd> or the Pause button. <kbd>Esc</kbd> returns to the main menu.</p></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= GAME ================= -->
+  <main id="gameScreen" class="screen hidden">
+    <div class="game-wrap">
+      <div class="game-hud">
+        <div id="scoreHud" class="hud-box pixel">Score: 0 / 50</div>
+        <div class="hud-box pixel"><canvas id="shieldIcon" width="26" height="32"></canvas><span id="shieldHud">Red Shield</span></div>
+        <div id="livesHud" class="hud-box pixel">Lives: &#9829; &#9829; &#9829;</div>
+      </div>
+      <div class="game-stage">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="Quests of the Round Table gameplay"></canvas>
+        <div id="toast" class="pixel"></div>
+        <div id="gameOverlay" class="overlay hidden">
+          <div class="modal">
+            <h2 id="overlayTitle" class="pixel">Paused</h2>
+            <p id="overlayText"></p>
+            <button id="resumeBtn" class="menu-btn primary pixel">Resume</button>
+            <button id="restartBtn" class="menu-btn pixel">Restart Run</button>
+            <button id="overlayMenuBtn" class="menu-btn secondary pixel">Main Menu</button>
+          </div>
+        </div>
+      </div>
+      <p class="game-help">Jump: Space / &uarr; / W / tap &nbsp;&bull;&nbsp; Pause: P &nbsp;&bull;&nbsp; Menu: Esc</p>
+      <div class="game-controls">
+        <button id="jumpBtn" class="pixel">JUMP</button>
+        <button id="pauseBtn" class="secondary pixel">PAUSE</button>
+        <button id="quitBtn" class="secondary pixel">MENU</button>
+      </div>
+    </div>
+  </main>
+</div></div>
+
+<script>
+(() => {
+'use strict';
+
+/* =====================================================================
+   1. CONFIG & GAME DATA
+   ===================================================================== */
+const CFG = {
+  view:        { w: 1280, h: 720 },  // logical canvas resolution
+  groundY:     612,                  // y of the ground surface
+  target:      50,                   // winning score
+  gravity:     0.8,                  // per-frame gravity
+  jumpV:       -15.5,                // normal jump velocity (peak ~150px)
+  rampV:       -21,                 // ramp launch velocity (peak ~275px)
+  speedBase:   7,                    // starting scroll speed
+  speedPerPoint: 0.105,              // speed gained per score point
+  speedMax:    13.8,
+  lives:       3,
+  invulnFrames: 95,                  // stun/blink frames after a hit
+  saveKey:     'qotrt-save-v2'
+};
+
+const SHIELDS = [
+  { name: 'Red Shield',       short: 'Red',      need: 0,  field: '#b7342c', charge: 'cross'   },
+  { name: 'Blue Shield',      short: 'Blue',     need: 10, field: '#33619c', charge: 'fleur'   },
+  { name: 'Green Shield',     short: 'Green',    need: 20, field: '#3c7d4c', charge: 'oak'     },
+  { name: 'Silver Shield',    short: 'Silver',   need: 30, field: '#b9c0c7', charge: 'chevron' },
+  { name: 'Royal Shield',     short: 'Royal',    need: 40, field: '#5d3f8f', charge: 'crown'   },
+  { name: 'Gold Lion Shield', short: 'Gold Lion',need: 50, field: '#d9a927', charge: 'lion'    }
+];
+
+const SUITS = [
+  { name: 'Crimson Guard', color: '#b7342c' },
+  { name: 'Azure Guard',   color: '#376c99' },
+  { name: 'Emerald Guard', color: '#3c8054' },
+  { name: 'Sun Guard',     color: '#c08d24' }
+];
+
+const LEVELS = [
+  { name: 'The Forest Gate',        start: 0,  goal: 10 },
+  { name: 'Stumpwood Trail',        start: 10, goal: 20 },
+  { name: 'Castle Moat',            start: 20, goal: 30 },
+  { name: 'Black Knight Pass',      start: 30, goal: 40 },
+  { name: "Giant's Ramp",           start: 40, goal: 50 },
+  { name: 'The Gold Lion Tournament', start: 45, goal: 50, final: true }
+];
+
+/* Obstacle roster: dimensions and the score at which each can appear.
+   Green/red knights are too tall for a normal jump and always spawn
+   behind a launch ramp (see spawnObstacle). */
+const OBST = {
+  stump:       { w: 54,  h: 56,  minScore: 0  },
+  ramp:        { w: 120, h: 54,  minScore: 8  },
+  blackKnight: { w: 70,  h: 100, minScore: 16 },
+  blueKnight:  { w: 80,  h: 130, minScore: 25 },
+  greenKnight: { w: 90,  h: 165, minScore: 33 },
+  redKnight:   { w: 100, h: 190, minScore: 41 }
+};
+
+/* =====================================================================
+   2. PERSISTENCE
+   ===================================================================== */
+let store = { best: 0, suit: 0 };
+try { store = Object.assign(store, JSON.parse(localStorage.getItem(CFG.saveKey) || '{}')); } catch (e) {}
+const save = () => { try { localStorage.setItem(CFG.saveKey, JSON.stringify(store)); } catch (e) {} };
+
+/* =====================================================================
+   3. DOM HELPERS & NAVIGATION
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const SCREENS = ['menuScreen','levelsScreen','shieldsScreen','suitsScreen','instructionsScreen','gameScreen'];
+const show = id => SCREENS.forEach(s => $(s).classList.toggle('hidden', s !== id));
+const topMenuBtn = $('topMenuBtn'), topPauseBtn = $('topPauseBtn');
+const shieldTier = score => { let t = 0; SHIELDS.forEach((s, i) => { if (score >= s.need) t = i; }); return t; };
+
+let toastTimer = 0;
+function toast(msg) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+function goMenu() {
+  stopRun();
+  show('menuScreen');
+  topMenuBtn.classList.add('hidden');
+  topPauseBtn.classList.add('hidden');
+}
+
+$('startBtn').addEventListener('click', () => startRun(0));
+$('levelsBtn').addEventListener('click', () => { renderLevels(); show('levelsScreen'); });
+$('shieldsBtn').addEventListener('click', () => { renderShields(); show('shieldsScreen'); });
+$('suitsBtn').addEventListener('click', () => { renderSuits(); show('suitsScreen'); });
+$('instructionsBtn').addEventListener('click', () => show('instructionsScreen'));
+document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => show('menuScreen')));
+topMenuBtn.addEventListener('click', goMenu);
+topPauseBtn.addEventListener('click', togglePause);
+$('pauseBtn').addEventListener('click', togglePause);
+$('quitBtn').addEventListener('click', goMenu);
+$('jumpBtn').addEventListener('click', jump);
+$('resumeBtn').addEventListener('click', () => { if (g) g.paused = false; hideOverlay(); });
+$('restartBtn').addEventListener('click', () => { hideOverlay(); startRun(g ? g.startScore : 0); });
+$('overlayMenuBtn').addEventListener('click', goMenu);
+
+window.addEventListener('keydown', e => {
+  if (['ArrowUp', ' ', 'w', 'W'].includes(e.key)) { e.preventDefault(); jump(); }
+  if (e.key.toLowerCase() === 'p') togglePause();
+  if (e.key === 'Escape' && !$('gameScreen').classList.contains('hidden')) goMenu();
+});
+
+/* =====================================================================
+   4. MENU RENDERING (canvas thumbnails share the in-game art code)
+   ===================================================================== */
+function renderLevels() {
+  const grid = $('levelGrid');
+  grid.innerHTML = '';
+  LEVELS.forEach((lv, i) => {
+    const unlocked = store.best >= lv.start;
+    const complete = store.best >= lv.goal || (lv.final && store.best >= CFG.target);
+    const card = document.createElement('button');
+    card.className = 'level-card pixel ' + (unlocked ? 'unlocked' : 'locked');
+    card.disabled = !unlocked;
+    card.innerHTML =
+      `<div class="level-num">${i + 1}</div>` +
+      `<div class="level-name">${lv.name}</div>` +
+      `<div class="level-goal">Start: ${lv.start} pts &bull; Goal: ${lv.goal} pts</div>` +
+      `<div class="level-status">${complete ? (lv.final ? '&#127942;' : '&#10003;') : (unlocked ? '&#9876;' : '&#128274;')}</div>`;
+    if (unlocked) card.addEventListener('click', () => startRun(lv.start));
+    grid.appendChild(card);
+  });
+}
+
+function renderShields() {
+  const grid = $('shieldGrid');
+  grid.innerHTML = '';
+  SHIELDS.forEach((s, i) => {
+    const unlocked = store.best >= s.need;
+    const card = document.createElement('div');
+    card.className = 'shield-card' + (unlocked ? '' : ' locked');
+    const cv = document.createElement('canvas');
+    cv.width = 96; cv.height = 116;
+    drawHerald(cv.getContext('2d'), 10, 6, 76, i);
+    card.appendChild(cv);
+    const name = document.createElement('div');
+    name.className = 'shield-name pixel';
+    name.textContent = s.name;
+    card.appendChild(name);
+    const req = document.createElement('div');
+    req.className = 'shield-requirement';
+    req.textContent = unlocked ? 'Unlocked' : 'Reach ' + s.need + ' points';
+    card.appendChild(req);
+    if (!unlocked) {
+      const lock = document.createElement('div');
+      lock.className = 'lock-badge';
+      lock.innerHTML = '&#128274;';
+      card.appendChild(lock);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function renderSuits() {
+  const grid = $('suitGrid');
+  grid.innerHTML = '';
+  SUITS.forEach((s, i) => {
+    const card = document.createElement('button');
+    card.className = 'suit-card';
+    const cv = document.createElement('canvas');
+    cv.width = 96; cv.height = 116;
+    drawSuitBust(cv.getContext('2d'), 48, 108, i);
+    card.appendChild(cv);
+    card.insertAdjacentHTML('beforeend',
+      `<div class="suit-label pixel">${s.name}</div>` +
+      (store.suit === i ? '<div class="suit-selected pixel">SELECTED</div>' : ''));
+    card.addEventListener('click', () => { store.suit = i; save(); renderSuits(); });
+    grid.appendChild(card);
+  });
+}
+
+/* =====================================================================
+   5. GAME STATE & LOOP
+   ===================================================================== */
+const canvas = $('gameCanvas'), ctx = canvas.getContext('2d');
+let g = null;   // active run state
+
+function startRun(startScore) {
+  show('gameScreen');
+  topMenuBtn.classList.remove('hidden');
+  topPauseBtn.classList.remove('hidden');
+  const score = Math.max(0, Math.min(CFG.target - 1, startScore));
+  g = {
+    score, startScore: score, lives: CFG.lives,
+    speed: CFG.speedBase + score * CFG.speedPerPoint,
+    dist: 0, time: 0, spawnTimer: 70,
+    obstacles: [], particles: [], floaters: [], clouds: [],
+    shake: 0, over: false, won: false, paused: false,
+    player: {
+      x: 170, y: CFG.groundY - 84, w: 52, h: 84,
+      vy: 0, onGround: true, invuln: 0, runPhase: 0, wasAir: false, dustTick: 0
+    }
+  };
+  for (let i = 0; i < 6; i++) {
+    g.clouds.push({ x: 60 + i * 230 + Math.random() * 90, y: 50 + Math.random() * 110, w: 90 + Math.random() * 90, s: 0.08 + Math.random() * 0.18 });
+  }
+  updateHud();
+  hideOverlay();
+  cancelAnimationFrame(g.raf);
+  g.last = performance.now();
+  g.raf = requestAnimationFrame(loop);
+}
+
+function stopRun() {
+  if (g) { cancelAnimationFrame(g.raf); g = null; }
+  hideOverlay();
+}
+
+function loop(t) {
+  if (!g) return;
+  const dt = Math.min(2.5, (t - g.last) / 16.667); // normalized to 60fps steps
+  g.last = t;
+  if (!g.paused) update(dt);
+  draw();
+  g.raf = requestAnimationFrame(loop);
+}
+
+/* ---------- per-frame update ---------- */
+function update(dt) {
+  g.time += dt;
+
+  // After a win, keep animating particles/floaters only (confetti).
+  if (g.over) {
+    updateParticles(dt);
+    return;
+  }
+
+  const p = g.player;
+  g.dist += g.speed * dt;
+  g.speed = Math.min(CFG.speedMax, CFG.speedBase + g.score * CFG.speedPerPoint);
+
+  // Player physics
+  if (p.invuln > 0) p.invuln -= dt;
+  p.vy += CFG.gravity * dt;
+  p.y += p.vy * dt;
+  const landed = p.y + p.h >= CFG.groundY;
+  if (landed) {
+    if (p.wasAir) { dust(p.x + p.w / 2, CFG.groundY, 10); }   // landing puff
+    p.y = CFG.groundY - p.h;
+    p.vy = 0;
+    p.onGround = true;
+  } else {
+    p.onGround = false;
+  }
+  p.wasAir = !landed;
+  if (p.onGround) p.runPhase += g.speed * 0.14 * dt;
+
+  // Running dust
+  p.dustTick -= dt;
+  if (p.onGround && p.dustTick <= 0) { dust(p.x + 6, CFG.groundY - 2, 1); p.dustTick = 7; }
+
+  // Spawning
+  g.spawnTimer -= dt;
+  if (g.spawnTimer <= 0) {
+    spawnObstacle();
+    g.spawnTimer = Math.max(52, 100 - g.score * 0.9) + Math.random() * 22;
+  }
+
+  // Move obstacles
+  for (const o of g.obstacles) o.x -= g.speed * dt;
+  g.obstacles = g.obstacles.filter(o => o.x + o.w > -120);
+
+  // Scoring, ramps, collisions
+  for (const o of g.obstacles) {
+    if (!o.counted && o.x + o.w < p.x) {
+      o.counted = true;
+      if (o.kind !== 'ramp') {
+        const before = shieldTier(g.score);
+        g.score++;
+        store.best = Math.max(store.best, g.score);
+        save();
+        updateHud();
+        g.floaters.push({ x: p.x + 30, y: p.y - 14, life: 42, text: '+1' });
+        const after = shieldTier(g.score);
+        if (after !== before) {
+          toast('Shield upgraded: ' + SHIELDS[after].name + '!');
+          burst(p.x + p.w / 2, p.y + 20, '#ffe08a', 26);
+        }
+        if (g.score >= CFG.target) { winRun(); return; }
+      }
+    }
+    if (o.kind === 'ramp' && !o.used && overlaps(p, o) && p.y + p.h <= CFG.groundY + 10) {
+      o.used = true;
+      p.vy = CFG.rampV;
+      p.onGround = false;
+      burst(o.x + o.w / 2, CFG.groundY - 10, '#e6b54f', 16);
+      g.floaters.push({ x: o.x + o.w / 2, y: CFG.groundY - 90, life: 40, text: 'LAUNCH!' });
+    }
+    if (o.kind !== 'ramp' && overlaps(p, o) && p.invuln <= 0) { hitObstacle(); break; }
+  }
+
+  // Clouds
+  for (const c of g.clouds) {
+    c.x -= c.s * g.speed * dt;
+    if (c.x + c.w < 0) { c.x = CFG.view.w + 60; c.y = 40 + Math.random() * 130; }
+  }
+
+  updateParticles(dt);
+  if (g.shake > 0) g.shake -= dt;
+}
+
+function updateParticles(dt) {
+  for (const pt of g.particles) {
+    pt.x += pt.vx * dt;
+    pt.y += pt.vy * dt;
+    pt.vy += 0.14 * dt;
+    pt.life -= dt;
+  }
+  g.particles = g.particles.filter(pt => pt.life > 0);
+  for (const f of g.floaters) { f.y -= 0.9 * dt; f.life -= dt; f.x -= g.speed * 0.25 * dt; }
+  g.floaters = g.floaters.filter(f => f.life > 0);
+}
+
+/* ---------- spawning ---------- */
+function spawnObstacle() {
+  const s = g.score, r = Math.random();
+  let kind = 'stump';
+  if (s >= OBST.redKnight.minScore   && r > 0.90) kind = 'redKnight';
+  else if (s >= OBST.greenKnight.minScore && r > 0.86) kind = 'greenKnight';
+  else if (s >= OBST.blueKnight.minScore  && r > 0.82) kind = 'blueKnight';
+  else if (s >= OBST.blackKnight.minScore && r > 0.76) kind = 'blackKnight';
+  else if (s >= OBST.ramp.minScore && r > 0.60) kind = 'ramp';
+
+  const x0 = CFG.view.w + 60;
+  if (kind === 'greenKnight' || kind === 'redKnight' || (kind === 'blueKnight' && Math.random() < 0.5)) {
+    // Launch ramp placed ahead of the giant so the boost clears it.
+    pushObstacle('ramp', x0);
+    pushObstacle(kind, x0 + OBST.ramp.w + 250);
+  } else {
+    pushObstacle(kind, x0);
+  }
+}
+
+function pushObstacle(kind, x) {
+  const d = OBST[kind];
+  g.obstacles.push({ kind, x, w: d.w, h: d.h, y: CFG.groundY - d.h, counted: false, used: false });
+}
+
+/* ---------- collisions ---------- */
+function overlaps(a, b) {
+  const ax = a.x + 8, ay = a.y + 8, aw = a.w - 16, ah = a.h - 8;
+  const bx = b.x + 6, by = b.y + 6, bw = b.w - 12, bh = b.h - 6;
+  return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+}
+
+function hitObstacle() {
+  const p = g.player;
+  g.lives--;
+  p.invuln = CFG.invulnFrames;
+  g.shake = 12;
+  burst(p.x + p.w / 2, p.y + 30, '#e04e42', 20);
+  updateHud();
+  // Clear the immediate path so the stun isn't a second collision.
+  g.obstacles = g.obstacles.filter(o => !(o.x < p.x + 110 && o.x + o.w > p.x - 40));
+  p.y = CFG.groundY - p.h;
+  p.vy = 0;
+  p.onGround = true;
+  if (g.lives <= 0) {
+    g.over = true;
+    topPauseBtn.classList.add('hidden');
+    showOverlay('Quest Failed',
+      'The knights of the forest have stopped Sir Lancelot at ' + g.score + ' points. ' +
+      'Clear 50 in a single run to claim the Gold Lion Shield.');
+  }
+}
+
+function winRun() {
+  g.over = true;
+  g.won = true;
+  g.score = CFG.target;
+  store.best = CFG.target;
+  save();
+  updateHud();
+  topPauseBtn.classList.add('hidden');
+  // Golden confetti
+  const colors = ['#ffe18a', '#d9a927', '#fff5d6', '#b7342c', '#33619c'];
+  for (let i = 0; i < 90; i++) {
+    g.particles.push({
+      x: Math.random() * CFG.view.w, y: -20 - Math.random() * 200,
+      vx: (Math.random() - 0.5) * 2, vy: 1 + Math.random() * 2.5,
+      life: 120 + Math.random() * 80, color: colors[i % colors.length],
+      size: 4 + Math.random() * 5
+    });
+  }
+  showOverlay('Victory!',
+    'Sir Lancelot has earned the Gold Lion Shield and a seat of honor at the Round Table. Onward to further quests!');
+  $('resumeBtn').classList.add('hidden');
+}
+
+/* ---------- controls ---------- */
+function jump() {
+  if (!g || g.paused || g.over) return;
+  const p = g.player;
+  if (p.onGround) {
+    p.vy = CFG.jumpV;
+    p.onGround = false;
+    dust(p.x + p.w / 2, CFG.groundY, 6);
+  }
+}
+
+function togglePause() {
+  if (!g || g.over) return;
+  g.paused = !g.paused;
+  if (g.paused) showOverlay('Paused', 'The quest is waiting. The forest holds its breath.');
+  else hideOverlay();
+}
+
+function showOverlay(title, text) {
+  $('overlayTitle').textContent = title;
+  $('overlayText').textContent = text;
+  $('resumeBtn').classList.toggle('hidden', !!g && g.over);
+  $('gameOverlay').classList.remove('hidden');
+}
+function hideOverlay() { $('gameOverlay').classList.add('hidden'); }
+
+canvas.addEventListener('pointerdown', e => { e.preventDefault(); jump(); });
+
+/* ---------- HUD ---------- */
+function updateHud() {
+  const tier = shieldTier(g ? g.score : 0);
+  $('scoreHud').textContent = 'Score: ' + (g ? g.score : 0) + ' / ' + CFG.target;
+  $('shieldHud').textContent = SHIELDS[tier].name;
+  const ic = $('shieldIcon'), icx = ic.getContext('2d');
+  icx.clearRect(0, 0, ic.width, ic.height);
+  drawHerald(icx, 1, 1, 24, tier);
+  const lives = g ? g.lives : CFG.lives;
+  $('livesHud').innerHTML = 'Lives: ' +
+    '&#9829; '.repeat(lives).trim() +
+    (lives < CFG.lives ? ' ' + '&#9825; '.repeat(CFG.lives - lives).trim() : '');
+}
+
+/* ---------- particles ---------- */
+function burst(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    g.particles.push({
+      x, y,
+      vx: (Math.random() - 0.5) * 5.5, vy: -Math.random() * 5 - 1,
+      life: 26 + Math.random() * 30, color, size: 3 + Math.random() * 4
+    });
+  }
+}
+function dust(x, y, n) {
+  for (let i = 0; i < n; i++) {
+    g.particles.push({
+      x: x + (Math.random() - 0.5) * 18, y: y - Math.random() * 6,
+      vx: -1 - Math.random() * 1.5, vy: -Math.random() * 1.2,
+      life: 14 + Math.random() * 14, color: 'rgba(120, 90, 60, 0.55)', size: 3 + Math.random() * 3
+    });
+  }
+}
+
+/* =====================================================================
+   6. ART LIBRARY
+   ===================================================================== */
+const R = (x, y, w, h, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
+
+/* ---------- background ---------- */
+function drawSky() {
+  const grad = ctx.createLinearGradient(0, 0, 0, CFG.groundY);
+  grad.addColorStop(0, '#9fd8e6');
+  grad.addColorStop(0.6, '#c8e8dd');
+  grad.addColorStop(1, '#e6f2d8');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, CFG.view.w, CFG.groundY);
+  // sun
+  const sx = 1080, sy = 92;
+  ctx.fillStyle = '#ffe9a8';
+  ctx.beginPath(); ctx.arc(sx, sy, 44, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#ffd985';
+  ctx.beginPath(); ctx.arc(sx, sy, 32, 0, Math.PI * 2); ctx.fill();
+  // sun rays
+  ctx.strokeStyle = 'rgba(255, 233, 168, 0.55)';
+  ctx.lineWidth = 5;
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4 + g.time * 0.003;
+    ctx.beginPath();
+    ctx.moveTo(sx + Math.cos(a) * 54, sy + Math.sin(a) * 54);
+    ctx.lineTo(sx + Math.cos(a) * 70, sy + Math.sin(a) * 70);
+    ctx.stroke();
+  }
+}
+
+function drawClouds() {
+  for (const c of g.clouds) {
+    const x = c.x, y = c.y, w = c.w;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(x + w * 0.25, y, w * 0.22, 0, Math.PI * 2);
+    ctx.arc(x + w * 0.5, y - w * 0.12, w * 0.28, 0, Math.PI * 2);
+    ctx.arc(x + w * 0.75, y, w * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(210, 228, 235, 0.9)';
+    ctx.fillRect(x + w * 0.08, y + w * 0.1, w * 0.84, w * 0.14);
+  }
+}
+
+function drawHills() {
+  // far hills
+  ctx.fillStyle = '#8fb998';
+  ctx.beginPath();
+  ctx.moveTo(0, 470);
+  for (let x = 0; x <= CFG.view.w; x += 40) {
+    const y = 440 + Math.sin((x + g.dist * 0.05) * 0.006) * 26;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(CFG.view.w, CFG.groundY); ctx.lineTo(0, CFG.groundY); ctx.closePath(); ctx.fill();
+  // nearer hills
+  ctx.fillStyle = '#6fa27c';
+  ctx.beginPath();
+  ctx.moveTo(0, 500);
+  for (let x = 0; x <= CFG.view.w; x += 40) {
+    const y = 486 + Math.sin((x + g.dist * 0.1) * 0.008 + 2) * 18;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(CFG.view.w, CFG.groundY); ctx.lineTo(0, CFG.groundY); ctx.closePath(); ctx.fill();
+}
+
+function drawCastle() {
+  const cycle = CFG.view.w + 760;
+  const bx = CFG.view.w + 240 - ((g.dist * 0.12) % cycle);
+  const x = bx, t = g.time;
+  // hill under the castle
+  ctx.fillStyle = '#5f9469';
+  ctx.beginPath();
+  ctx.moveTo(x - 90, CFG.groundY);
+  ctx.quadraticCurveTo(x + 90, 400, x + 270, CFG.groundY);
+  ctx.closePath(); ctx.fill();
+  // moat water in front of the hill
+  ctx.fillStyle = '#4f8fb5';
+  ctx.fillRect(x - 90, CFG.groundY - 14, 360, 14);
+  ctx.fillStyle = '#7fb7d6';
+  for (let i = 0; i < 8; i++) {
+    const wx = x - 80 + ((i * 52 + t * 0.6) % 340);
+    ctx.fillRect(wx, CFG.groundY - 12, 22, 3);
+  }
+  // curtain wall
+  R(x - 40, 470, 260, 100, '#9a938b');
+  for (let i = 0; i < 9; i++) R(x - 40 + i * 30, 462, 18, 10, '#9a938b');   // crenellation
+  // brick texture
+  ctx.fillStyle = 'rgba(0,0,0,0.08)';
+  for (let ry = 478; ry < 566; ry += 14) ctx.fillRect(x - 40, ry, 260, 2);
+  for (let ry = 478, row = 0; ry < 566; ry += 14, row++) {
+    for (let rx = x - 40 + (row % 2) * 14; rx < x + 220; rx += 28) ctx.fillRect(rx, ry, 2, 12);
+  }
+  // gate
+  ctx.fillStyle = '#5a4a33';
+  ctx.beginPath();
+  ctx.moveTo(x + 62, 570); ctx.lineTo(x + 62, 520);
+  ctx.quadraticCurveTo(x + 82, 498, x + 102, 520);
+  ctx.lineTo(x + 102, 570); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#3d3122'; ctx.lineWidth = 3;
+  for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(x + 62 + i * 10, 505); ctx.lineTo(x + 62 + i * 10, 570); ctx.stroke(); }
+  // towers
+  for (const tx of [x - 70, x + 190]) {
+    R(tx, 430, 64, 140, '#8b847c');
+    for (let i = 0; i < 3; i++) R(tx + i * 24, 422, 16, 10, '#8b847c');
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    for (let ry = 440; ry < 566; ry += 14) ctx.fillRect(tx, ry, 64, 2);
+    // conical roof
+    ctx.fillStyle = '#6b7fa3';
+    ctx.beginPath();
+    ctx.moveTo(tx - 10, 424); ctx.lineTo(tx + 32, 372); ctx.lineTo(tx + 74, 424);
+    ctx.closePath(); ctx.fill();
+    // flag
+    ctx.strokeStyle = '#4a3b28'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(tx + 32, 372); ctx.lineTo(tx + 32, 344); ctx.stroke();
+    const wave = Math.sin(t * 0.15) * 5;
+    ctx.fillStyle = '#b7342c';
+    ctx.beginPath();
+    ctx.moveTo(tx + 32, 344);
+    ctx.quadraticCurveTo(tx + 52, 348 + wave, tx + 64, 352);
+    ctx.quadraticCurveTo(tx + 52, 356 - wave, tx + 32, 362);
+    ctx.closePath(); ctx.fill();
+    // window
+    ctx.fillStyle = '#342d31';
+    ctx.fillRect(tx + 26, 448, 12, 20);
+  }
+  // keep
+  R(x + 40, 402, 84, 168, '#a09a90');
+  for (let i = 0; i < 4; i++) R(x + 40 + i * 24, 394, 14, 10, '#a09a90');
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+  for (let ry = 410; ry < 566; ry += 14) ctx.fillRect(x + 40, ry, 84, 2);
+  ctx.fillStyle = '#342d31';
+  ctx.fillRect(x + 66, 424, 12, 20); ctx.fillRect(x + 92, 424, 12, 20);
+  ctx.fillRect(x + 78, 470, 14, 24);
+}
+
+function drawTreeline() {
+  const spacing = 210;
+  for (let i = -1; i < 8; i++) {
+    const x = i * spacing - (g.dist * 0.3) % spacing;
+    drawTree(x + 40, 330 + ((i * 37) % 3) * 22, 1.15);
+    drawTree(x + 140, 356 + ((i * 53) % 3) * 18, 0.9);
+  }
+}
+
+function drawTree(x, y, s) {
+  // trunk
+  ctx.fillStyle = '#6b4a2f';
+  ctx.fillRect(x - 7 * s, y, 14 * s, (CFG.groundY - y) * 0.9);
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.fillRect(x + 2 * s, y, 4 * s, (CFG.groundY - y) * 0.9);
+  // canopy: shadow, base, highlight
+  const blobs = [[0, -46, 34], [-26, -22, 26], [26, -22, 26], [0, -18, 30]];
+  ctx.fillStyle = '#2c5e3a';
+  for (const [dx, dy, r] of blobs) { ctx.beginPath(); ctx.arc(x + dx * s, y + dy * s, r * s, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = '#3e7d4f';
+  for (const [dx, dy, r] of blobs) { ctx.beginPath(); ctx.arc(x + dx * s, y + (dy - 5) * s, r * 0.88 * s, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = '#57a05f';
+  for (const [dx, dy, r] of blobs) { ctx.beginPath(); ctx.arc(x + (dx - 5) * s, y + (dy - 12) * s, r * 0.5 * s, 0, Math.PI * 2); ctx.fill(); }
+}
+
+function drawBushes() {
+  const spacing = 300;
+  for (let i = -1; i < 6; i++) {
+    const x = i * spacing - (g.dist * 0.55) % spacing + 80;
+    const y = CFG.groundY - 6;
+    ctx.fillStyle = '#2c5e3a';
+    ctx.beginPath();
+    ctx.arc(x, y, 26, Math.PI, 0); ctx.arc(x + 30, y, 20, Math.PI, 0); ctx.arc(x - 28, y, 18, Math.PI, 0);
+    ctx.fill();
+    ctx.fillStyle = '#3e7d4f';
+    ctx.beginPath();
+    ctx.arc(x - 4, y - 4, 20, Math.PI, 0); ctx.arc(x + 26, y - 6, 15, Math.PI, 0);
+    ctx.fill();
+  }
+}
+
+function drawGround() {
+  R(0, CFG.groundY, CFG.view.w, CFG.view.h - CFG.groundY, '#8a5a36');
+  R(0, CFG.groundY, CFG.view.w, 14, '#58963f');       // grass band
+  R(0, CFG.groundY + 14, CFG.view.w, 4, '#3f7330');   // grass shadow
+  const spacing = 56;
+  for (let i = -1; i < 25; i++) {
+    const x = i * spacing - (g.dist % spacing);
+    // grass tufts
+    ctx.strokeStyle = '#4f8a35'; ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(x + 6, CFG.groundY + 2); ctx.lineTo(x + 2, CFG.groundY - 8);
+    ctx.moveTo(x + 10, CFG.groundY + 2); ctx.lineTo(x + 10, CFG.groundY - 10);
+    ctx.moveTo(x + 14, CFG.groundY + 2); ctx.lineTo(x + 18, CFG.groundY - 7);
+    ctx.stroke();
+    // pebbles & darker dirt
+    R(x + 30, CFG.groundY + 34, 14, 5, '#6d4527');
+    R(x + 8, CFG.groundY + 66, 20, 5, '#75492b');
+    R(x + 38, CFG.groundY + 50, 8, 4, '#a97c50');
+    // tiny flowers
+    if (i % 3 === 0) {
+      R(x + 22, CFG.groundY - 4, 4, 4, i % 2 ? '#e8c94e' : '#d97a94');
+      R(x + 46, CFG.groundY - 3, 3, 3, '#e8c94e');
+    }
+  }
+}
+
+/* ---------- obstacles ---------- */
+function drawObstacle(o) {
+  if (o.kind === 'stump') drawStump(o);
+  else if (o.kind === 'ramp') drawRamp(o);
+  else drawGiantKnight(o);
+}
+
+function shadow(x, w) {
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.beginPath();
+  ctx.ellipse(x, CFG.groundY + 4, w, 7, 0, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawStump(o) {
+  const x = o.x, y = o.y;
+  shadow(x + o.w / 2, o.w * 0.6);
+  // trunk with bark streaks
+  R(x + 8, y + 14, o.w - 16, o.h - 14, '#704429');
+  R(x + 8, y + 14, 6, o.h - 14, '#5a3620');
+  R(x + o.w - 18, y + 14, 6, o.h - 14, '#5a3620');
+  R(x + 20, y + 26, 4, o.h - 34, '#8a5a36');
+  // cut top with rings
+  R(x, y + 6, o.w, 12, '#8d5b35');
+  R(x + 4, y + 8, o.w - 8, 8, '#b07b43');
+  ctx.strokeStyle = '#8d5b35'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(x + o.w / 2, y + 12, 8, 3.5, 0, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(x + o.w / 2, y + 12, 3.5, 1.5, 0, 0, Math.PI * 2); ctx.stroke();
+  // roots & grass
+  R(x + 2, y + o.h - 8, 10, 8, '#5a3620');
+  R(x + o.w - 12, y + o.h - 8, 10, 8, '#5a3620');
+  ctx.strokeStyle = '#4f8a35'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 2, CFG.groundY + 2); ctx.lineTo(x - 6, CFG.groundY - 9);
+  ctx.moveTo(x + o.w + 2, CFG.groundY + 2); ctx.lineTo(x + o.w + 6, CFG.groundY - 8);
+  ctx.stroke();
+  // little mushroom
+  R(x + o.w - 4, y + o.h - 16, 6, 8, '#e8dcc0');
+  R(x + o.w - 7, y + o.h - 20, 12, 6, '#c0563c');
+}
+
+function drawRamp(o) {
+  const x = o.x, w = o.w, h = o.h, gy = CFG.groundY;
+  shadow(x + w / 2, w * 0.55);
+  // wooden wedge
+  ctx.fillStyle = '#a8703d';
+  ctx.beginPath();
+  ctx.moveTo(x, gy); ctx.lineTo(x + w, gy); ctx.lineTo(x + w, gy - h);
+  ctx.closePath(); ctx.fill();
+  // plank lines
+  ctx.strokeStyle = '#8a5a30'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x + 4, gy - 6); ctx.lineTo(x + w - 2, gy - 6);
+  ctx.moveTo(x + 4, gy - 18); ctx.lineTo(x + w - 2, gy - 18);
+  ctx.moveTo(x + 4, gy - 30); ctx.lineTo(x + w - 2, gy - 30);
+  ctx.stroke();
+  // support struts
+  ctx.strokeStyle = '#6d4527'; ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x + 24, gy - 12); ctx.lineTo(x + 24, gy);
+  ctx.moveTo(x + 56, gy - 24); ctx.lineTo(x + 56, gy);
+  ctx.moveTo(x + 88, gy - 36); ctx.lineTo(x + 88, gy);
+  ctx.stroke();
+  // gold arrow marks pointing up the slope
+  ctx.fillStyle = '#e1ae55';
+  for (let i = 0; i < 3; i++) {
+    const ax = x + 14 + i * 30, ay = gy - 10 - i * 11;
+    ctx.beginPath();
+    ctx.moveTo(ax + 5, ay - 7); ctx.lineTo(ax + 10, ay + 2); ctx.lineTo(ax, ay + 2);
+    ctx.closePath(); ctx.fill();
+  }
+}
+
+const KNIGHT_STYLES = {
+  blackKnight: { armor: '#2b303b', trim: '#454c5c', plume: '#8a93a5', weapon: 'sword',      emblem: '#c8ccd4' },
+  blueKnight:  { armor: '#33558a', trim: '#4a79b8', plume: '#7fa8dc', weapon: 'axe',        emblem: '#cfe0f2' },
+  greenKnight: { armor: '#2f6b44', trim: '#4f9c66', plume: '#8cc79e', weapon: 'spear',      emblem: '#d5eede' },
+  redKnight:   { armor: '#9c2f28', trim: '#c8544a', plume: '#e08a80', weapon: 'greatsword', emblem: '#f2d5c8' }
+};
+
+function drawGiantKnight(o) {
+  const K = KNIGHT_STYLES[o.kind];
+  const x = o.x, y = o.y, w = o.w, h = o.h, t = g.time;
+  const cx = x + w / 2;
+  shadow(cx, w * 0.55);
+
+  // legs (armored plates)
+  const legW = w * 0.22, legH = h * 0.34;
+  R(cx - w * 0.34, y + h - legH, legW, legH, K.trim);
+  R(cx + w * 0.12, y + h - legH, legW, legH, K.trim);
+  ctx.fillStyle = 'rgba(0,0,0,0.25)';
+  for (let i = 1; i < 4; i++) {
+    R(cx - w * 0.34, y + h - legH + i * legH / 4, legW, 3);
+    R(cx + w * 0.12, y + h - legH + i * legH / 4, legW, 3);
+  }
+  // sabatons
+  R(cx - w * 0.38, y + h - 10, legW + 8, 10, '#3a3f4a');
+  R(cx + w * 0.08, y + h - 10, legW + 8, 10, '#3a3f4a');
+
+  // tabard torso
+  R(x + w * 0.16, y + h * 0.30, w * 0.68, h * 0.42, K.armor);
+  R(x + w * 0.16, y + h * 0.30, w * 0.68, 6, K.trim);
+  // chest emblem (roundel + cross)
+  ctx.fillStyle = K.emblem;
+  ctx.beginPath(); ctx.arc(cx, y + h * 0.44, w * 0.11, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = K.armor;
+  ctx.fillRect(cx - 2, y + h * 0.40, 4, h * 0.08);
+  ctx.fillRect(cx - w * 0.05, y + h * 0.425, w * 0.1, 4);
+  // belt
+  R(x + w * 0.16, y + h * 0.62, w * 0.68, 7, '#3a2c1e');
+  R(cx - 5, y + h * 0.615, 10, 10, '#d9a927');
+
+  // pauldrons
+  R(x + w * 0.06, y + h * 0.28, w * 0.2, h * 0.09, K.trim);
+  R(x + w * 0.74, y + h * 0.28, w * 0.2, h * 0.09, K.trim);
+
+  // off-arm shield (kind colors)
+  const shX = x - w * 0.10, shY = y + h * 0.34, shW = w * 0.34;
+  ctx.save();
+  ctx.fillStyle = K.armor;
+  ctx.beginPath();
+  ctx.moveTo(shX, shY); ctx.lineTo(shX + shW, shY);
+  ctx.lineTo(shX + shW, shY + shW * 0.55);
+  ctx.quadraticCurveTo(shX + shW, shY + shW * 0.82, shX + shW / 2, shY + shW * 1.05);
+  ctx.quadraticCurveTo(shX, shY + shW * 0.82, shX, shY + shW * 0.55);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = K.trim; ctx.lineWidth = 3; ctx.stroke();
+  ctx.restore();
+
+  // weapon arm + weapon
+  const armY = y + h * 0.34;
+  R(x + w * 0.86, armY, w * 0.14, h * 0.22, K.trim);
+  if (K.weapon === 'sword' || K.weapon === 'greatsword') {
+    const swH = K.weapon === 'greatsword' ? h * 0.62 : h * 0.45;
+    R(x + w * 0.94, armY - swH + 14, 8, swH, '#dfe2ea');
+    R(x + w * 0.94, armY - swH + 14, 3, swH, '#aab0bd');
+    R(x + w * 0.86, armY + 2, w * 0.24, 7, '#d9a927');   // crossguard
+    R(x + w * 0.955, armY + 9, 5, 12, '#6d4527');        // grip
+  } else if (K.weapon === 'axe') {
+    R(x + w * 0.94, armY - h * 0.3, 7, h * 0.42, '#8a6a4a');
+    ctx.fillStyle = '#c8ccd4';
+    ctx.beginPath();
+    ctx.moveTo(x + w * 0.94, armY - h * 0.3);
+    ctx.quadraticCurveTo(x + w * 1.22, armY - h * 0.26, x + w * 1.1, armY - h * 0.06);
+    ctx.lineTo(x + w * 0.94, armY - h * 0.1);
+    ctx.closePath(); ctx.fill();
+  } else { // spear
+    R(x + w * 0.96, armY - h * 0.36, 6, h * 0.62, '#8a6a4a');
+    ctx.fillStyle = '#dfe2ea';
+    ctx.beginPath();
+    ctx.moveTo(x + w * 0.99, armY - h * 0.36);
+    ctx.lineTo(x + w * 1.08, armY - h * 0.28);
+    ctx.lineTo(x + w * 0.99, armY - h * 0.2);
+    ctx.closePath(); ctx.fill();
+  }
+
+  // helmet
+  R(x + w * 0.22, y + h * 0.06, w * 0.56, h * 0.24, '#b5b3a6');
+  R(x + w * 0.22, y + h * 0.06, w * 0.56, 5, '#d8d5c6');
+  R(x + w * 0.24, y + h * 0.15, w * 0.52, 7, '#252832');   // visor slit
+  R(x + w * 0.24, y + h * 0.24, w * 0.52, 5, '#252832');
+  // breathing dots
+  ctx.fillStyle = '#252832';
+  for (let i = 0; i < 4; i++) ctx.fillRect(x + w * 0.3 + i * w * 0.1, y + h * 0.235, 3, 3);
+  // crest ridge
+  R(x + w * 0.44, y, w * 0.12, h * 0.08, '#b5b3a6');
+  // plume waving
+  const pw = Math.sin(t * 0.18 + x * 0.05) * 4;
+  ctx.fillStyle = K.plume;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.5, y);
+  ctx.quadraticCurveTo(x + w * 0.5 - 14, y - 18 + pw, x + w * 0.5 - 20, y - 30 + pw);
+  ctx.quadraticCurveTo(x + w * 0.5 - 6, y - 20 + pw, x + w * 0.5 + 2, y - 4);
+  ctx.closePath(); ctx.fill();
+  // crown trim for the red knight (final challenge)
+  if (o.kind === 'redKnight') {
+    ctx.fillStyle = '#d9a927';
+    const cy2 = y + h * 0.02;
+    ctx.fillRect(x + w * 0.3, cy2 + 6, w * 0.4, 4);
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.moveTo(x + w * 0.3 + i * w * 0.14, cy2 + 6);
+      ctx.lineTo(x + w * 0.3 + w * 0.07 + i * w * 0.14, cy2 - 6);
+      ctx.lineTo(x + w * 0.3 + w * 0.14 + i * w * 0.14, cy2 + 6);
+      ctx.closePath(); ctx.fill();
+    }
+  }
+}
+
+/* ---------- player: Sir Lancelot ---------- */
+function drawPlayer() {
+  const p = g.player, t = g.time;
+  if (p.invuln > 0 && Math.floor(t / 4) % 2 === 0) return;  // hit blink
+  const x = Math.round(p.x), y = Math.round(p.y);
+  const suit = SUITS[store.suit].color;
+  const suitDark = SUITS[store.suit].color;
+  const tier = shieldTier(g.score);
+
+  // shadow shrinks with height
+  const air = Math.min(1.5, Math.max(0, (CFG.groundY - (p.y + p.h)) / 150)); // clamped so ellipse radius stays positive
+  ctx.fillStyle = 'rgba(0,0,0,' + (0.22 - air * 0.12) + ')';
+  ctx.beginPath();
+  ctx.ellipse(x + p.w / 2, CFG.groundY + 5, 26 * (1 - air * 0.4), 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // cape fluttering behind
+  const flap = Math.sin(t * 0.25) * 4;
+  ctx.fillStyle = '#8c2620';
+  ctx.beginPath();
+  ctx.moveTo(x + 14, y + 22);
+  ctx.quadraticCurveTo(x - 14, y + 40 + flap, x - 8, y + 74 - flap);
+  ctx.lineTo(x + 12, y + 70);
+  ctx.closePath(); ctx.fill();
+
+  // legs: 4-frame run cycle on ground, tucked pose in air
+  const frame = Math.floor(p.runPhase) % 4;
+  const legY = y + 58;
+  ctx.fillStyle = '#9aa0ac';
+  if (p.onGround) {
+    const offs = [[0, 10, 4], [6, 6, -6], [0, 10, 4], [-6, 6, 6]][frame];
+    R(x + 14 + offs[0], legY, 10, 26 - offs[1] * 0.4, '#9aa0ac');
+    R(x + 28 - offs[0], legY, 10, 26 - offs[2] * 0.4, '#8a909c');
+    R(x + 12 + offs[0], legY + 22, 14, 6, '#3a3f4a');
+    R(x + 27 - offs[0], legY + 22, 14, 6, '#3a3f4a');
+  } else {
+    R(x + 13, legY, 11, 18, '#9aa0ac');
+    R(x + 28, legY + 4, 11, 16, '#8a909c');
+    R(x + 11, legY + 14, 14, 6, '#3a3f4a');
+    R(x + 27, legY + 16, 14, 6, '#3a3f4a');
+  }
+
+  // torso: tabard in suit colors with belt
+  R(x + 12, y + 26, 28, 34, suit);
+  R(x + 12, y + 26, 28, 5, 'rgba(255,255,255,0.25)');
+  R(x + 12, y + 50, 28, 6, '#3a2c1e');
+  R(x + 22, y + 49, 8, 8, '#d9a927');
+  // chest emblem: small cross
+  ctx.fillStyle = '#f3e3b8';
+  ctx.fillRect(x + 23, y + 32, 5, 12); ctx.fillRect(x + 19, y + 36, 13, 5);
+
+  // back arm
+  R(x + 6, y + 30, 8, 20, suitDark);
+  R(x + 4, y + 46, 12, 8, '#9aa0ac');
+
+  // head: helmet, visor, plume
+  R(x + 10, y + 2, 32, 26, '#c9ccd4');
+  R(x + 10, y + 2, 32, 5, '#e2e5ea');
+  R(x + 12, y + 14, 28, 6, '#242a32');
+  R(x + 12, y + 21, 28, 4, '#242a32');
+  const plume = Math.sin(t * 0.22) * 4;
+  ctx.fillStyle = '#d9534a';
+  ctx.beginPath();
+  ctx.moveTo(x + 26, y + 2);
+  ctx.quadraticCurveTo(x + 40, y - 12 + plume, x + 52, y - 16 + plume);
+  ctx.quadraticCurveTo(x + 38, y - 2 + plume, x + 30, y + 4);
+  ctx.closePath(); ctx.fill();
+
+  // front arm + shield with current heraldry
+  R(x + 38, y + 30, 8, 18, suitDark);
+  drawHerald(ctx, x - 16, y + 28, 34, tier);
+
+  // sword in the right hand (raised while airborne)
+  if (!p.onGround) {
+    R(x + 46, y - 26, 6, 44, '#dfe2ea');
+    R(x + 46, y - 26, 2, 44, '#aab0bd');
+    R(x + 40, y + 16, 18, 5, '#d9a927');
+  } else {
+    R(x + 44, y + 34, 6, 34, '#dfe2ea');
+    R(x + 44, y + 34, 2, 34, '#aab0bd');
+    R(x + 38, y + 32, 18, 5, '#d9a927');
+  }
+}
+
+/* ---------- particles & floaters ---------- */
+function drawParticles() {
+  for (const pt of g.particles) {
+    ctx.globalAlpha = Math.max(0, Math.min(1, pt.life / 40));
+    ctx.fillStyle = pt.color;
+    ctx.fillRect(Math.round(pt.x), Math.round(pt.y), Math.round(pt.size), Math.round(pt.size));
+  }
+  ctx.globalAlpha = 1;
+  ctx.font = 'bold 15px "Press Start 2P", monospace';
+  ctx.textAlign = 'center';
+  for (const f of g.floaters) {
+    ctx.globalAlpha = Math.max(0, Math.min(1, f.life / 30));
+    ctx.fillStyle = '#fff5d6';
+    ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 4;
+    ctx.strokeText(f.text, f.x, f.y);
+    ctx.fillText(f.text, f.x, f.y);
+  }
+  ctx.globalAlpha = 1;
+  ctx.textAlign = 'left';
+}
+
+/* ---------- master draw ---------- */
+function draw() {
+  const shakeX = g.shake > 0 ? (Math.random() - 0.5) * g.shake : 0;
+  const shakeY = g.shake > 0 ? (Math.random() - 0.5) * g.shake * 0.6 : 0;
+  ctx.save();
+  ctx.translate(shakeX, shakeY);
+  drawSky();
+  drawClouds();
+  drawHills();
+  drawCastle();
+  drawTreeline();
+  drawBushes();
+  drawGround();
+  for (const o of g.obstacles) drawObstacle(o);
+  drawPlayer();
+  drawParticles();
+  ctx.restore();
+}
+
+/* =====================================================================
+   7. HERALDRY (shared by gameplay, HUD, and menu thumbnails)
+   ===================================================================== */
+function shieldPath(c, x, y, w) {
+  const h = w * 1.16;
+  c.beginPath();
+  c.moveTo(x, y);
+  c.lineTo(x + w, y);
+  c.lineTo(x + w, y + h * 0.52);
+  c.quadraticCurveTo(x + w, y + h * 0.78, x + w / 2, y + h);
+  c.quadraticCurveTo(x, y + h * 0.78, x, y + h * 0.52);
+  c.closePath();
+  return h;
+}
+
+function drawHerald(c, x, y, w, tier) {
+  const sh = SHIELDS[tier];
+  const h = w * 1.16;
+  // field with drop shadow
+  c.save();
+  c.shadowColor = 'rgba(0,0,0,0.4)';
+  c.shadowBlur = w * 0.1;
+  c.shadowOffsetY = w * 0.05;
+  shieldPath(c, x, y, w);
+  c.fillStyle = sh.field;
+  c.fill();
+  c.restore();
+  // gold border + dark rim
+  shieldPath(c, x, y, w);
+  c.lineWidth = Math.max(2, w * 0.075);
+  c.strokeStyle = '#e6c15c';
+  c.stroke();
+  // clip to shield for the charge & shading
+  c.save();
+  shieldPath(c, x, y, w);
+  c.clip();
+  // gloss highlight
+  c.fillStyle = 'rgba(255,255,255,0.16)';
+  c.beginPath();
+  c.ellipse(x + w * 0.32, y + h * 0.18, w * 0.3, h * 0.12, -0.5, 0, Math.PI * 2);
+  c.fill();
+  c.fillStyle = 'rgba(0,0,0,0.12)';
+  c.fillRect(x, y + h * 0.58, w, h * 0.5);
+  // charge
+  const cx = x + w / 2, u = w / 100;
+  c.fillStyle = '#e6c15c';
+  switch (sh.charge) {
+    case 'cross': {
+      c.fillRect(cx - 6 * u, y + h * 0.16, 12 * u, h * 0.56);
+      c.fillRect(cx - 22 * u, y + h * 0.34, 44 * u, 12 * u);
+      // flared diamond ends
+      for (const [dx, dy] of [[0, 0.14], [0, 0.76], [-0.26, 0.4], [0.26, 0.4]]) {
+        c.beginPath();
+        c.moveTo(cx + dx * w, y + h * dy - 8 * u);
+        c.lineTo(cx + dx * w + 8 * u, y + h * dy);
+        c.lineTo(cx + dx * w, y + h * dy + 8 * u);
+        c.lineTo(cx + dx * w - 8 * u, y + h * dy);
+        c.closePath(); c.fill();
+      }
+      break;
+    }
+    case 'fleur': drawFleur(c, cx, y + h * 0.42, u * 1.5); break;
+    case 'oak': {
+      // gold oak tree
+      c.fillStyle = '#e6c15c';
+      c.fillRect(cx - 4 * u, y + h * 0.52, 8 * u, 18 * u);
+      c.beginPath(); c.arc(cx, y + h * 0.34, 15 * u, 0, Math.PI * 2); c.fill();
+      c.beginPath(); c.arc(cx - 12 * u, y + h * 0.46, 10 * u, 0, Math.PI * 2); c.fill();
+      c.beginPath(); c.arc(cx + 12 * u, y + h * 0.46, 10 * u, 0, Math.PI * 2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,0.25)';
+      c.beginPath(); c.arc(cx - 5 * u, y + h * 0.3, 6 * u, 0, Math.PI * 2); c.fill();
+      break;
+    }
+    case 'chevron': {
+      c.strokeStyle = '#2e4f7f';
+      c.lineWidth = 9 * u;
+      c.beginPath();
+      c.moveTo(cx - 24 * u, y + h * 0.32);
+      c.lineTo(cx, y + h * 0.5);
+      c.lineTo(cx + 24 * u, y + h * 0.32);
+      c.stroke();
+      c.fillStyle = '#b7342c';
+      for (const dx of [-20, 0, 20]) {
+        c.beginPath(); c.arc(cx + dx * u, y + h * 0.68, 6 * u, 0, Math.PI * 2); c.fill();
+      }
+      break;
+    }
+    case 'crown': drawCrown(c, cx - 26 * u, y + h * 0.3, 52 * u); break;
+    case 'lion': drawLion(c, cx - 30 * u, y + h * 0.14, u * 0.62); break;
+  }
+  c.restore();
+}
+
+/* Fleur-de-lis charge */
+function drawFleur(c, cx, cy, s) {
+  c.save();
+  c.translate(cx, cy);
+  c.scale(s, s);
+  c.fillStyle = '#e6c15c';
+  // center petal
+  c.beginPath();
+  c.moveTo(0, -26);
+  c.quadraticCurveTo(9, -10, 5, 4);
+  c.lineTo(-5, 4);
+  c.quadraticCurveTo(-9, -10, 0, -26);
+  c.closePath(); c.fill();
+  // side petals
+  for (const d of [-1, 1]) {
+    c.beginPath();
+    c.moveTo(d * 4, -2);
+    c.quadraticCurveTo(d * 20, -14, d * 16, 4);
+    c.quadraticCurveTo(d * 10, 12, d * 4, 4);
+    c.closePath(); c.fill();
+  }
+  // band
+  c.fillRect(-13, 6, 26, 5);
+  // lower tails
+  for (const d of [-1, 0, 1]) {
+    c.beginPath();
+    c.moveTo(d * 8 - 2, 11);
+    c.quadraticCurveTo(d * 8 + d * 2, 18, d * 8, 22);
+    c.lineTo(d * 8 + 2, 11);
+    c.closePath(); c.fill();
+  }
+  c.restore();
+}
+
+/* Crown charge */
+function drawCrown(c, x, y, w) {
+  const h = w * 0.62;
+  c.fillStyle = '#e6c15c';
+  c.fillRect(x, y + h * 0.72, w, h * 0.28);
+  c.beginPath();
+  c.moveTo(x, y + h * 0.72);
+  c.lineTo(x, y);
+  c.lineTo(x + w * 0.2, y + h * 0.45);
+  c.lineTo(x + w * 0.4, y);
+  c.lineTo(x + w * 0.6, y + h * 0.45);
+  c.lineTo(x + w * 0.8, y);
+  c.lineTo(x + w, y + h * 0.72);
+  c.closePath(); c.fill();
+  c.fillStyle = '#b7342c';
+  c.fillRect(x + w * 0.44, y + h * 0.78, w * 0.12, h * 0.16);
+}
+
+/* Lion rampant charge (the Gold Lion Shield) */
+function drawLion(c, x, y, s) {
+  c.save();
+  c.translate(x, y);
+  c.scale(s, s);
+  c.fillStyle = '#23262e';
+  // tail
+  c.beginPath();
+  c.moveTo(66, 74);
+  c.quadraticCurveTo(96, 66, 90, 34);
+  c.quadraticCurveTo(88, 26, 80, 30);
+  c.quadraticCurveTo(86, 56, 60, 66);
+  c.closePath(); c.fill();
+  // tail tuft
+  c.beginPath();
+  c.moveTo(80, 30); c.lineTo(92, 16); c.lineTo(95, 34);
+  c.closePath(); c.fill();
+  // hind legs
+  c.beginPath();
+  c.moveTo(58, 88); c.lineTo(74, 112); c.lineTo(62, 118); c.lineTo(50, 96);
+  c.closePath(); c.fill();
+  c.beginPath();
+  c.moveTo(46, 90); c.lineTo(40, 114); c.lineTo(28, 110); c.lineTo(36, 86);
+  c.closePath(); c.fill();
+  // body
+  c.beginPath();
+  c.moveTo(28, 30);
+  c.quadraticCurveTo(50, 42, 56, 66);
+  c.quadraticCurveTo(62, 88, 48, 98);
+  c.lineTo(32, 88);
+  c.quadraticCurveTo(40, 62, 26, 46);
+  c.closePath(); c.fill();
+  // raised foreleg
+  c.beginPath();
+  c.moveTo(26, 34);
+  c.quadraticCurveTo(12, 26, 6, 12);
+  c.lineTo(14, 4);
+  c.quadraticCurveTo(22, 18, 34, 24);
+  c.closePath(); c.fill();
+  // standing foreleg
+  c.beginPath();
+  c.moveTo(30, 44);
+  c.quadraticCurveTo(24, 58, 26, 72);
+  c.lineTo(36, 74);
+  c.quadraticCurveTo(38, 58, 36, 48);
+  c.closePath(); c.fill();
+  // mane with spikes
+  c.beginPath(); c.arc(26, 22, 15, 0, Math.PI * 2); c.fill();
+  for (let i = 0; i < 8; i++) {
+    const a = i / 8 * Math.PI * 2;
+    const sx = 26 + Math.cos(a) * 14, sy = 22 + Math.sin(a) * 14;
+    const tx = 26 + Math.cos(a) * 22, ty = 22 + Math.sin(a) * 22;
+    c.beginPath();
+    c.moveTo(sx + Math.cos(a + 1.6) * 5, sy + Math.sin(a + 1.6) * 5);
+    c.lineTo(tx, ty);
+    c.lineTo(sx + Math.cos(a - 1.6) * 5, sy + Math.sin(a - 1.6) * 5);
+    c.closePath(); c.fill();
+  }
+  // face + ear
+  c.beginPath(); c.arc(20, 24, 9, 0, Math.PI * 2); c.fill();
+  c.beginPath(); c.moveTo(24, 12); c.lineTo(30, 4); c.lineTo(31, 14); c.closePath(); c.fill();
+  // gold eye and claws, red tongue
+  c.fillStyle = '#e6c15c';
+  c.fillRect(17, 20, 3, 3);
+  c.fillRect(4, 2, 3, 3); c.fillRect(9, 0, 3, 3);
+  c.fillStyle = '#c0392b';
+  c.beginPath(); c.moveTo(12, 28); c.lineTo(4, 32); c.lineTo(12, 34); c.closePath(); c.fill();
+  c.restore();
+}
+
+/* Suit bust thumbnail for the Suits menu */
+function drawSuitBust(c, cx, baseY, idx) {
+  const col = SUITS[idx].color;
+  // plume
+  c.fillStyle = '#d9534a';
+  c.beginPath();
+  c.moveTo(cx - 2, baseY - 92);
+  c.quadraticCurveTo(cx + 14, baseY - 104, cx + 24, baseY - 100);
+  c.quadraticCurveTo(cx + 10, baseY - 92, cx + 4, baseY - 88);
+  c.closePath(); c.fill();
+  // helmet
+  c.fillStyle = '#c9ccd4';
+  c.fillRect(cx - 20, baseY - 88, 40, 34);
+  c.fillStyle = '#e2e5ea';
+  c.fillRect(cx - 20, baseY - 88, 40, 6);
+  c.fillStyle = '#242a32';
+  c.fillRect(cx - 17, baseY - 74, 34, 7);
+  c.fillRect(cx - 17, baseY - 65, 34, 5);
+  // gorget
+  c.fillStyle = '#9aa0ac';
+  c.fillRect(cx - 24, baseY - 54, 48, 8);
+  // pauldrons
+  c.fillStyle = '#b9bdc6';
+  c.fillRect(cx - 44, baseY - 46, 20, 16);
+  c.fillRect(cx + 24, baseY - 46, 20, 16);
+  // tabard
+  c.fillStyle = col;
+  c.fillRect(cx - 26, baseY - 46, 52, 46);
+  c.fillStyle = 'rgba(255,255,255,0.22)';
+  c.fillRect(cx - 26, baseY - 46, 52, 6);
+  // chest cross
+  c.fillStyle = '#f3e3b8';
+  c.fillRect(cx - 3, baseY - 40, 6, 22);
+  c.fillRect(cx - 11, baseY - 33, 22, 6);
+  // belt
+  c.fillStyle = '#3a2c1e';
+  c.fillRect(cx - 26, baseY - 16, 52, 7);
+  c.fillStyle = '#d9a927';
+  c.fillRect(cx - 4, baseY - 17, 8, 9);
+}
+
+/* =====================================================================
+   8. INIT
+   ===================================================================== */
+drawHerald($('crestCanvas').getContext('2d'), 14, 5, 76, SHIELDS.length - 1);
+renderLevels();
+renderShields();
+renderSuits();
+updateHud();
+})();
+</script>
+</body>
+</html>
+renderSuits();
+updateHud();
+})();
+</script>
+</body>
+</html>
